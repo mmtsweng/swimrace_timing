@@ -1,6 +1,10 @@
 <html>
 <head>
 	<?php include 'layouthead.php' ?>
+	<script>
+		showTruncated = true;
+		showOverall = true;
+	</script>
 </head>
 <body>
 	<?php include 'layoutprecontent.php' ?>
@@ -8,7 +12,7 @@
 	<H2>Overall</H2>
 	<div id="scrollableTable">
 		<div id='startScrolling'/>
-		<table id="finisherTable">
+		<table id="finisherTable" class='finisherTable'>
 			<thead>
 				<tr>
 				<td colspan="2">Position</td>

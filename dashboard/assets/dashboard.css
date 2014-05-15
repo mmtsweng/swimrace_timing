@@ -6,7 +6,7 @@ border : 0;
 }
 
 body, p, td, div {
-	font-family: 'Verdana, Arial, San Serif'; 
+	font-family: Verdana, Geneva, Arial, sans-serif; 
 	font-size: 18pt;
 }
 h2{
@@ -40,9 +40,10 @@ text-align: center;
 
 .pageContent{
 float: left;
-margin-top: 150px;
-margin-left: 100px;
+margin-top: 15%;
+margin-left: 10%;
 display: block;
+width:75%;
 }
 .pageContent h1, .pageContent h2{
 text-align: center;
@@ -50,41 +51,41 @@ text-align: center;
 
 
 /* Results Table */
-#finisherTable td
+.finisherTable td
 {
 padding-left: 10px;
 font-size: 14pt;
 padding-top: 10px;
 }
-#finisherTable thead td
+.finisherTable thead td
 {
 font-weight: bold;
 }
-#finisherTable .race
+.finisherTable .race
 {
 font-size: 12pt;
 font-weight: bold;
 padding-left: 10px;
 }
-#finisherTable .cap
+.finisherTable .cap
 {
 background-position: center;
 background-size: 20px 20px;
 background-repeat: no-repeat;
 }
-#finisherTable .Yellow
+.finisherTable .Yellow
 {
 background-image : url('/swimrace_timing/dashboard/assets/yellowcap.png');
 }
-#finisherTable .Pink
+.finisherTable .Pink
 {
 background-image : url('/swimrace_timing/dashboard/assets/pinkcap.png');
 }
-#finisherTable .Green
+.finisherTable .Green
 {
 background-image : url('/swimrace_timing/dashboard/assets/greencap.png');
 }
-#finisherTable .hasFins
+.finisherTable .hasFins
 {
 background-position: center;
 background-size: 30px 30px;

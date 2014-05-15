@@ -76,7 +76,7 @@ class Racers extends APIInterface
 	//API Method to GET the list of racers that have finished, in order of finish
 	public function finishorder()
 	{
-		$sql = $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, r.Description, r.Cap, r.CapHex, rs.HasFins, FROM_UNIXTIME(AVG(UNIX_TIMESTAMP(ts.FinishTime))) AS averageDate, tr.StartTime\n"
+		$sql = $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate, r.Description, r.Cap, r.CapHex, rs.HasFins, FROM_UNIXTIME(AVG(UNIX_TIMESTAMP(ts.FinishTime))) AS averageDate, tr.StartTime\n"
     . "FROM Races r, RaceSwimmers rs, Swimmers s, TimeSwimmer ts, TimeRace tr\n"
     . "WHERE rs.SwimmerID = s.ID \n"
     . "AND rs.RaceID = r.ID \n"

@@ -1,78 +1,61 @@
-<?php
-	require_once("apiurl.php");	
-	require_once("timerhelper.php");
-	
-	$response = file_get_contents($api . 'racefinishers');
-	$raceresponse = file_get_contents($api . 'races');
-	
-	try
-	{		
-		$finishers = json_decode($response, true);
-		$races = json_decode($raceresponse, true);
-	}
-	catch (Exception $e)
-	{
-		
-	}
-?>
-
 <html>
 <head>
-	<title>Dashboard</title>
-	<script type="text/javascript" src="assets/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="assets/results_async.js"></script>
-	<script type="text/javascript">
-		<?php
-			print "var finishers = jQuery.parseJSON('" . $response . "');";
-			print "var races = jQuery.parseJSON('" . $raceresponse . "');";
-		?>	
+	<?php include 'layouthead.php' ?>
+	<script>
+		showSeconds = true;
+		showFinals = true;
+		showTruncated = false;
 	</script>
 </head>
 <body>
-	<H1>Results</H1>	
-	<?php
-	foreach($races as $race)
-	{
-		print "<table id='resultTable" . $race['ID'] . "' >";
-		print "<thead><tr><td colspan='4'><H2>" . $race['Description'] ."</H2></td></tr></thead>";
-		foreach($finishers as $item)
-		{
-			if ($item['ID'] == $race['ID'])
-			{
-				if ($item['HasFins'] == '1')
-				{
-					print "<tr class='fins'>";
-				}
-				else
-				{
-					print "<tr>";
-				}
-				print "<tr>";
-				print "<td style='background-color:" . $item['CapHex'] . "'>";
-				print $item['RacerNumber'];
-				print "</td>";
-				print "<td>";
-				print timerFormat(strtotime($item['StartTime']), strtotime($item['averageDate']), true);
-				print "</td>";
-				print "<td>";
-				print $item['LastName'] . ", " . $item['FirstName'];
-				print "</td>";
-				if ($item['HasFins'] == '1')
-				{
-					print "<td>FINS</td>";
-				}
-				else
-				{
-					print "<td>&nbsp;</td>";
-				}
-				
-				print "</tr>\n";
-			}
-		}	
-		print "</table>\n";
-	}
-	?>
+	<?php include 'layoutprecontent.php' ?>
+	<a href='extract.php'>Download</a>
+	<H1>Final Results</H1>
+	<H2>5 mile</H2>
+	<table id="finisherTable1" class='finisherTable'>
+		<thead>
+			<tr>
+			<td colspan="2">Position</td>
+			<td>Number</td>
+			<td>Name</td>
+			<td>Race Time</td>
+			<td>Fins</td>		
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
 	
+	<H2>2 mile</H2>
+	<table id="finisherTable2" class='finisherTable'>
+		<thead>
+			<tr>
+			<td colspan="2">Position</td>
+			<td>Number</td>
+			<td>Name</td>
+			<td>Race Time</td>
+			<td>Fins</td>		
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+	
+	<H2>1 mile</H2>
+	<table id="finisherTable3" class='finisherTable'>
+		<thead>
+			<tr>
+			<td colspan="2">Position</td>
+			<td>Number</td>
+			<td>Name</td>
+			<td>Race Time</td>
+			<td>Fins</td>		
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+	<?php include 'layoutpostcontent.php' ?>
 </body>
 </html>
 	
