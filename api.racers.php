@@ -17,7 +17,8 @@ class Racers extends APIInterface
 		$sql = "SELECT s.FirstName, s.LastName, r.Description, r.Cap ".
 			"FROM RaceSwimmers rs, Races r, Swimmers s ".
 			"WHERE rs.SwimmerID = s.ID ".
-			"AND rs.RaceID = r.ID";
+			"AND rs.RaceID = r.ID ".
+			"ORDER BY rs.RaceID";
 		$query = mysql_query($sql, $this->db);
 		if (mysql_num_rows($query) > 0)
 		{
@@ -53,6 +54,33 @@ class Racers extends APIInterface
 		catch (Exception $e)
 		{
 			$this->response('{"ID":-1}',400);
+		}		
+	}
+	
+	//API Method to update a swimmer
+	public function editracer()
+	{
+		try
+		{
+			//Expected format: {"ID":"5","SwimmerID":1, "RaceID":1}
+			$postjson = json_decode(file_get_contents("php://input"),true);
+			$id = (int)$postjson['ID'];
+			$swimmer = (int)$postjson['SwimmerID'];
+			$race = (int)$postjson['RaceID'];
+			
+			$sql = "UPDATE RaceSwimmers ".
+			"SET SwimmerID='$swimmer', ".
+			"RaceID='$race' ".
+			"WHERE ID=$id";
+			
+			$retval = mysql_query($sql, $this->db);
+			$resp = array('ID' => $id);
+		
+			$this->response(json_encode($resp), 200);
+		}
+		catch (Exception $e)
+		{
+			$this->response('{"ID":"-1"}',400);
 		}		
 	}
 }
