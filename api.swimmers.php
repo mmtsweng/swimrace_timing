@@ -31,7 +31,7 @@ class Swimmers extends APIInterface
 	{
 		try
 		{
-			//Expected format: {"ID":"5","FirstName":"Taylor","LastName":"Brown","Gender":"F","Birthdate":"2005-09-14"}
+			//Expected format: {"FirstName":"Taylor","LastName":"Brown","Gender":"F","Birthdate":"2005-09-14"}
 			$postjson = json_decode(file_get_contents("php://input"),true);
 			$firstname = $postjson['FirstName'];
 			$lastname = $postjson['LastName'];
