@@ -1,6 +1,7 @@
 <?php
 	require_once("api.swimmers.php");
 	require_once("api.racers.php");
+	require_once("api.races.php");
 	require_once("api.times.php");
 	
 	class API extends APIInterface
@@ -12,6 +13,7 @@
 			$swimmers = new Swimmers();
 			$racers = new Racers();
 			$times = new Times();
+			$races = new Races();
 			
 			$func = strtolower(trim(str_replace("/", "", $_REQUEST['r'])));
 			if ((int)method_exists($this, $func) > 0)
@@ -25,6 +27,10 @@
 			else if ((int)method_exists($racers, $func)>0)
 			{
 				$racers->$func();
+			}
+			else if ((int)method_exists($races, $func)>0)
+			{
+				$races->$func();
 			}
 			else if ((int)method_exists($times, $func)>0)
 			{

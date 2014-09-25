@@ -9,7 +9,27 @@ class Racers extends APIInterface
 	public function __construct()
 	{
 		parent::__construct();
-	}		
+	}	
+	
+	//API Method to GET Swimmers not assigned to a race
+	public function nonracers()
+	{
+		$sql = "SELECT s.ID, s.FirstName, s.LastName \n".
+		"FROM Swimmers s \n".
+		"WHERE s.ID NOT IN (\n".
+		"SELECT SwimmerID FROM RaceSwimmers) LIMIT 0, 30 ";
+		$query = mysql_query($sql, $this->db);
+		if (mysql_num_rows($query) > 0)
+		{
+			$result = array();
+			while ($rlt = mysql_fetch_array($query, MYSQL_ASSOC))
+			{
+				$result[] = $rlt;
+			}
+			$this->response($this->json($result), 200);
+		}
+		$this->response('',204);
+	}	
 
 	//API Method to GET Swimmers
 	public function racers()
