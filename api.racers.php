@@ -34,7 +34,7 @@ class Racers extends APIInterface
 	//API Method to GET Swimmers
 	public function racers()
 	{
-		$sql = "SELECT rs.RacerNumber, s.FirstName, s.LastName, r.Description, r.Cap, rs.HasFins ".
+		$sql = "SELECT rs.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, r.Description, r.Cap, rs.HasFins ".
 			"FROM RaceSwimmers rs, Races r, Swimmers s ".
 			"WHERE rs.SwimmerID = s.ID ".
 			"AND rs.RaceID = r.ID ".

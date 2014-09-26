@@ -17,7 +17,6 @@
 ?>
 
 <?php if (!empty($_POST)): ?>
-    <h1>Saving Racer...</h1> 
     <?php
     
     //{"RacerNumber":123, "SwimmerID":1, "RaceID":1, "HasFins":0}
@@ -42,7 +41,8 @@
 		'Content-Length: ' . strlen($json))                                                                       
 	);                                                                                                                   
  	$result = curl_exec($ch);
-        
+    header("Location:" . $_SERVER["PHP_SELF"]);
+    
 	?>
 
 <?php else: ?>
@@ -59,7 +59,7 @@
 	</script>
 </head>
 <body>
-	<H1>Unassagned Swimmers</H1>
+	<H1>Unassigned Swimmers</H1>
 	<table>
 	<?php
 	foreach($swimmers as $item)
@@ -70,7 +70,7 @@
 		print $item['ID'] . "<input type='hidden' name='ID' id='swimmerID' value='". $item['ID'] ."' />";
 		print "</td>";
 		print "<td>";
-		print $item['FirstName'] . " " . $item['LastName'];
+		print $item['LastName'] . ", " . $item['FirstName'];
 		print "</td>";
 		print "<td>";
 		print $item['Description'];
