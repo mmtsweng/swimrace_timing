@@ -1,36 +1,5 @@
 <?php 
 	require_once("apiurl.php");	
-
-
-if (!empty($_POST)):
-    
-    //{"RacerNumber":1, "FinishTime":"09-12-2014 12:15:20"}
-    
-    $data = array(
-		'RacerNumber'	=> $_POST['RacerNumber'],
-		'FinishTime'	=> $_POST['FinishTime']
-	);
-	$json = json_encode($data);
-	
-    //print($json);
-    
-    //Post Changes
-    $ch = curl_init('http://localhost:8080/swimrace_timing/api.php?r=swimmerfinish');                                                                      
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $json);                                                                  
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
-		'Content-Type: application/json',                                                                                
-		'Content-Length: ' . strlen($json))                                                                       
-	);                                                                                                                   
- 	$result = curl_exec($ch);
-    header("Location:" . $_SERVER["PHP_SELF"]);
-    
-	?>
-
-<?php else: ?>
-
-<?php
 	
 	$response = file_get_contents($api . 'racetimes');
 	
@@ -66,6 +35,6 @@ if (!empty($_POST)):
 </body>
 </html>
 	
-<?php endif; ?>
+
 
 
