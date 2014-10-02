@@ -74,21 +74,42 @@ class Times extends APIInterface
 			$postjson = json_decode(file_get_contents("php://input"),true);
 			$racernum = (int)$postjson['RacerNumber'];
 			$status = 1;
+			$result = array();
 			$finishtime = new DateTime($postjson['FinishTime']);
 			$mysqldate = $finishtime->format("Y-m-d H:i:s");
-						
-			$swimmersql = "SELECT ID From RaceSwimmers WHERE RacerNumber = $racernum limit 1";
-			$swimmerresult = mysql_query($swimmersql, $this->db);
-			$swimmerid = mysql_fetch_row($swimmerresult);
+			
+			$sql = "SELECT ID From RaceSwimmers WHERE RacerNumber = $racernum limit 1";
+			$idResult = mysql_query($sql, $this->db);
+			$swimmerid = mysql_fetch_row($idResult);
 			
 			$sql = "INSERT INTO TimeSwimmer (RaceSwimmerID, FinishTime, Status) ".
-			"VALUES ($swimmerid[0], '$mysqldate', $status)";
-			
+				"VALUES ($swimmerid[0], '$mysqldate', $status)";			
 			$retval = mysql_query($sql, $this->db);
 			$sqlid = mysql_insert_id();	
-			$resp = array('ID' => $sqlid);
-		
-			$this->response(json_encode($status), 200);
+
+			$sql = "SELECT rs.ID, ts.ID as TimeID, \n"
+				. "ts.FinishTime, \n"
+				. "tr.StartTime,\n"
+				. "rs.RacerNumber, s.firstname, s.lastname, r.Description, r.CapHex\n"
+				. "FROM RaceSwimmers rs, Swimmers s, Races r, TimeSwimmer ts, TimeRace tr\n"
+				. "WHERE rs.RacerNumber = $racernum\n"
+				. "AND rs.SwimmerID = s.ID\n"
+				. "AND rs.RaceID = r.ID\n"
+				. "AND rs.RaceID = tr.RaceID\n"
+				. "AND ts.ID = $sqlid\n"
+				. "	 limit 1";
+
+			$query = mysql_query($sql, $this->db);
+			$result = array();
+			if (mysql_num_rows($query) > 0)
+			{				
+				while ($rlt = mysql_fetch_array($query, MYSQL_ASSOC))
+				{
+					$result[] = $rlt;
+				}
+			}		
+			
+			$this->response(json_encode($result), 200);
 		}
 		catch (Exception $e)
 		{
