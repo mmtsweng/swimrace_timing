@@ -23,8 +23,8 @@
 			}
 			else
 			{
-				idx=-1;
-				showRace();
+				//For now, simply reload the page
+				location.reload(true);
 			}		
 		}
 		
