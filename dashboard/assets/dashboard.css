@@ -1,0 +1,104 @@
+
+*{
+padding : 0;
+margin : 0;
+border : 0;
+}
+
+body, p, td, div {
+	font-family: 'Verdana, Arial, San Serif'; 
+	font-size: 18pt;
+}
+h2{
+padding-left: 15px;
+}
+h3{
+padding-left: 25px;
+}
+
+body{
+background-image : url('/swimrace_timing/dashboard/assets/fulldesign.png ');
+background-attachment : fixed;
+background-repeat : no-repeat;
+background-size: 100%, auto;
+}
+
+.raceTimes
+{
+float: right;
+font-size: 8pt;
+height: 100%;
+display: block;
+margin-right: 10px;
+}
+.raceTimes p
+{
+font-size: 12pt;
+clear: both;
+text-align: center;
+}
+
+.pageContent{
+float: left;
+margin-top: 150px;
+margin-left: 100px;
+display: block;
+}
+.pageContent h1, .pageContent h2{
+text-align: center;
+}
+
+
+/* Results Table */
+#finisherTable td
+{
+padding-left: 10px;
+font-size: 14pt;
+padding-top: 10px;
+}
+#finisherTable thead td
+{
+font-weight: bold;
+}
+#finisherTable .race
+{
+font-size: 12pt;
+font-weight: bold;
+padding-left: 10px;
+}
+#finisherTable .cap
+{
+background-position: center;
+background-size: 20px 20px;
+background-repeat: no-repeat;
+}
+#finisherTable .Yellow
+{
+background-image : url('/swimrace_timing/dashboard/assets/yellowcap.png');
+}
+#finisherTable .Pink
+{
+background-image : url('/swimrace_timing/dashboard/assets/pinkcap.png');
+}
+#finisherTable .Green
+{
+background-image : url('/swimrace_timing/dashboard/assets/greencap.png');
+}
+#finisherTable .hasFins
+{
+background-position: center;
+background-size: 30px 30px;
+background-repeat: no-repeat;
+background-image : url('/swimrace_timing/dashboard/assets/fins.png');
+}
+
+/* SCROLLING */
+#scrollableTable
+{
+height: 60%;
+overflow: hidden;
+}
+#finishedScrolling
+{
+height: 60%;
+}
