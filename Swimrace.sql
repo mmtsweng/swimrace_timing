@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 01, 2014 at 05:01 PM
--- Server version: 5.5.38
+-- Generation Time: Nov 01, 2014 at 10:38 PM
+-- Server version: 5.5.40
 -- PHP Version: 5.4.4-14+deb7u14
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -116,6 +116,9 @@ CREATE TABLE IF NOT EXISTS `Swimmers` (
   `LastName` varchar(100) NOT NULL,
   `Gender` varchar(2) NOT NULL,
   `Birthdate` date NOT NULL,
+  `City` varchar(255) NOT NULL,
+  `State` varchar(255) NOT NULL,
+  `Country` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=armscii8 AUTO_INCREMENT=20 ;
 
@@ -123,25 +126,25 @@ CREATE TABLE IF NOT EXISTS `Swimmers` (
 -- Dumping data for table `Swimmers`
 --
 
-INSERT INTO `Swimmers` (`ID`, `FirstName`, `LastName`, `Gender`, `Birthdate`) VALUES
-(1, 'Matt', 'Brown', 'M', '1974-06-14'),
-(2, 'Megan', 'Brown', 'F', '1974-08-11'),
-(3, 'Ted', 'Rychlik', 'M', '1960-01-01'),
-(4, 'Suzanne', 'Rychlik', 'F', '1974-08-13'),
-(5, 'Taylor', 'Brown', 'F', '2005-09-14'),
-(7, 'Luis', 'Rosa', 'M', '1981-08-07'),
-(8, 'Roger', 'Goodell', 'M', '1988-06-01'),
-(9, 'Kyleigh', 'Rychlik', 'F', '2010-01-01'),
-(10, 'Alex', 'Kostich', 'M', '0000-00-00'),
-(11, 'Alex', 'Kostich', 'M', '0000-00-00'),
-(12, 'Brian', 'Brady', 'M', '0000-00-00'),
-(13, 'Mathew', 'Mays', 'M', '0000-00-00'),
-(14, 'Jonathan', 'Thomas', 'M', '0000-00-00'),
-(15, 'Tim', 'O''Neill', 'M', '0000-00-00'),
-(16, 'Geoffrey', 'Munger', 'M', '0000-00-00'),
-(17, 'Bob', 'Haulk', 'M', '0000-00-00'),
-(18, 'Jim', 'Harper', 'M', '0000-00-00'),
-(19, 'Brent', 'Mays', 'M', '0000-00-00');
+INSERT INTO `Swimmers` (`ID`, `FirstName`, `LastName`, `Gender`, `Birthdate`, `City`, `State`, `Country`) VALUES
+(1, 'Matt', 'Brown', 'M', '1974-06-14', 'Seattle', 'WA', 'USA'),
+(2, 'Megan', 'Brown', 'F', '1974-08-11', 'Seattle', 'WA', 'USA'),
+(3, 'Ted', 'Rychlik', 'M', '1960-01-01', 'Seattle', 'WA', 'USA'),
+(4, 'Suzanne', 'Rychlik', 'F', '1974-08-13', 'Seattle', 'WA', 'USA'),
+(5, 'Taylor', 'Brown', 'F', '2005-09-14', 'Seattle', 'WA', 'USA'),
+(7, 'Luis', 'Rosa', 'M', '1981-08-07', 'Seattle', 'WA', 'USA'),
+(8, 'Roger', 'Goodell', 'M', '1988-06-01', 'New York', 'NY', 'USA'),
+(9, 'Kyleigh', 'Rychlik', 'F', '2010-01-01', 'Seattle', 'WA', 'USA'),
+(10, 'Alex', 'Kostich', 'M', '0000-00-00', 'San Diego', 'CA', 'USA'),
+(11, 'Alex', 'Kostich', 'M', '0000-00-00', 'San Diego', 'CA', 'USA'),
+(12, 'Brian', 'Brady', 'M', '0000-00-00', 'Miami', 'FL', 'USA'),
+(13, 'Mathew', 'Mays', 'M', '0000-00-00', 'Atlanta', 'GA', 'USA'),
+(14, 'Jonathan', 'Thomas', 'M', '0000-00-00', 'Paris', '', 'FRA'),
+(15, 'Tim', 'O''Neill', 'M', '0000-00-00', 'Seattle', 'WA', 'USA'),
+(16, 'Geoffrey', 'Munger', 'M', '0000-00-00', 'Seattle', 'WA', 'USA'),
+(17, 'Bob', 'Haulk', 'M', '0000-00-00', 'Christensted', 'St. Croix', 'USVI'),
+(18, 'Jim', 'Harper', 'M', '0000-00-00', 'Los Angeles', 'CA', 'USA'),
+(19, 'Brent', 'Mays', 'M', '0000-00-00', 'Seattle', 'WA', 'USA');
 
 -- --------------------------------------------------------
 

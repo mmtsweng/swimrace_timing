@@ -30,6 +30,7 @@ font-size: 8pt;
 height: 100%;
 display: block;
 margin-right: 10px;
+border: red 1px solid;
 }
 .raceTimes p
 {
@@ -41,9 +42,9 @@ text-align: center;
 .pageContent{
 float: left;
 margin-top: 15%;
-margin-left: 10%;
+margin-left: 8%;
 display: block;
-width:75%;
+width:80%;
 }
 .pageContent h1, .pageContent h2{
 text-align: center;
@@ -91,6 +92,9 @@ background-position: center;
 background-size: 30px 30px;
 background-repeat: no-repeat;
 background-image : url('/swimrace_timing/dashboard/assets/fins.png');
+}
+.finisherTable .location
+{
 }
 
 /* SCROLLING */
