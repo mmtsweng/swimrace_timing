@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 23, 2014 at 09:00 AM
+-- Generation Time: Nov 01, 2014 at 05:01 PM
 -- Server version: 5.5.38
 -- PHP Version: 5.4.4-14+deb7u14
 
@@ -40,8 +40,8 @@ CREATE TABLE IF NOT EXISTS `Races` (
 
 INSERT INTO `Races` (`ID`, `Description`, `Cap`, `CapHex`) VALUES
 (1, '5 Mile', 'Yellow', '#FFFF00'),
-(2, '2-Mile', 'Green', '#33CC33'),
-(3, '1-Mile', 'Pink', '#FF66CC');
+(2, '2 Mile', 'Green', '#33CC33'),
+(3, '1 Mile', 'Pink', '#FF66CC');
 
 -- --------------------------------------------------------
 
@@ -56,20 +56,30 @@ CREATE TABLE IF NOT EXISTS `RaceSwimmers` (
   `RacerNumber` int(11) NOT NULL,
   `HasFins` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=armscii8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=armscii8 AUTO_INCREMENT=24 ;
 
 --
 -- Dumping data for table `RaceSwimmers`
 --
 
 INSERT INTO `RaceSwimmers` (`ID`, `SwimmerID`, `RaceID`, `RacerNumber`, `HasFins`) VALUES
-(2, 1, 1, 123, 0),
-(3, 4, 3, 77, 1),
-(4, 3, 2, 5, 0),
-(5, 7, 2, 321, 0),
-(6, 2, 3, 23, 0),
-(7, 5, 3, 17, 0),
-(8, 8, 1, 666, 0);
+(2, 1, 1, 13, 1),
+(3, 3, 1, 4, 0),
+(5, 7, 2, 16, 0),
+(9, 9, 3, 9, 1),
+(11, 5, 3, 12, 1),
+(12, 2, 3, 17, 0),
+(13, 8, 2, 14, 1),
+(14, 4, 2, 15, 0),
+(15, 10, 1, 1, 0),
+(16, 12, 1, 2, 0),
+(17, 13, 2, 3, 1),
+(18, 14, 1, 5, 0),
+(19, 15, 2, 6, 0),
+(20, 16, 1, 11, 0),
+(21, 17, 1, 8, 0),
+(22, 18, 1, 7, 0),
+(23, 19, 3, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -107,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `Swimmers` (
   `Gender` varchar(2) NOT NULL,
   `Birthdate` date NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=armscii8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=armscii8 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `Swimmers`
@@ -120,7 +130,18 @@ INSERT INTO `Swimmers` (`ID`, `FirstName`, `LastName`, `Gender`, `Birthdate`) VA
 (4, 'Suzanne', 'Rychlik', 'F', '1974-08-13'),
 (5, 'Taylor', 'Brown', 'F', '2005-09-14'),
 (7, 'Luis', 'Rosa', 'M', '1981-08-07'),
-(8, 'Roger', 'Goodell', 'M', '1988-06-01');
+(8, 'Roger', 'Goodell', 'M', '1988-06-01'),
+(9, 'Kyleigh', 'Rychlik', 'F', '2010-01-01'),
+(10, 'Alex', 'Kostich', 'M', '0000-00-00'),
+(11, 'Alex', 'Kostich', 'M', '0000-00-00'),
+(12, 'Brian', 'Brady', 'M', '0000-00-00'),
+(13, 'Mathew', 'Mays', 'M', '0000-00-00'),
+(14, 'Jonathan', 'Thomas', 'M', '0000-00-00'),
+(15, 'Tim', 'O''Neill', 'M', '0000-00-00'),
+(16, 'Geoffrey', 'Munger', 'M', '0000-00-00'),
+(17, 'Bob', 'Haulk', 'M', '0000-00-00'),
+(18, 'Jim', 'Harper', 'M', '0000-00-00'),
+(19, 'Brent', 'Mays', 'M', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -141,9 +162,9 @@ CREATE TABLE IF NOT EXISTS `TimeRace` (
 --
 
 INSERT INTO `TimeRace` (`ID`, `RaceID`, `StartTime`, `Status`) VALUES
-(1, 1, '2014-12-09 12:15:20', 0),
-(2, 1, '2014-12-09 12:15:20', 0),
-(3, 1, '2014-12-09 12:15:20', 1);
+(1, 1, '2014-10-17 19:50:41', 1),
+(2, 2, '2014-10-17 19:51:09', 1),
+(3, 3, '2014-10-17 19:51:44', 1);
 
 -- --------------------------------------------------------
 
@@ -157,7 +178,30 @@ CREATE TABLE IF NOT EXISTS `TimeSwimmer` (
   `FinishTime` datetime NOT NULL,
   `Status` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=armscii8 AUTO_INCREMENT=18 ;
+
+--
+-- Dumping data for table `TimeSwimmer`
+--
+
+INSERT INTO `TimeSwimmer` (`ID`, `RaceSwimmerID`, `FinishTime`, `Status`) VALUES
+(1, 15, '2014-10-17 19:53:06', 1),
+(2, 16, '2014-10-17 19:53:25', 1),
+(3, 17, '2014-10-17 19:53:42', 1),
+(4, 3, '2014-10-17 19:54:01', 1),
+(5, 18, '2014-10-17 19:54:12', 1),
+(6, 19, '2014-10-17 19:54:15', 1),
+(7, 22, '2014-10-17 19:54:58', 1),
+(8, 21, '2014-10-17 19:55:00', 1),
+(9, 9, '2014-10-17 19:55:03', 1),
+(10, 23, '2014-10-17 19:55:09', 1),
+(11, 20, '2014-10-17 19:55:13', 1),
+(12, 11, '2014-10-17 19:55:16', 1),
+(13, 2, '2014-10-17 19:55:19', 1),
+(14, 13, '2014-10-17 19:55:21', 1),
+(15, 14, '2014-10-17 19:55:25', 1),
+(16, 5, '2014-10-17 19:55:27', 1),
+(17, 12, '2014-10-17 19:55:29', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
