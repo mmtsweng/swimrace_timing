@@ -1,60 +1,39 @@
 <html>
 <head>
-	<?php include 'layouthead.php' ?>
+	<?php include 'layouthead_simple.php'; 
+	include 'reports/reportTimes.php'; 
+	$showRaceTimes = false; ?>
 	<script>
 		showSeconds = true;
 		showFinals = true;
 		showTruncated = false;
+		
+		$(function()
+		{
+			//Hide all divs
+			$("#slideshow > div:gt(0)").hide();
+			
+			setInterval(function() {
+				$('#slideshow > div:first')
+					.fadeOut(2000)
+					.next()
+					.fadeIn(2000)
+					.end()
+					.appendTo('#slideshow');
+				}, 5000);
+		});
+		
 	</script>
 </head>
 <body>
 	<?php include 'layoutprecontent.php' ?>
-	<a href='extract.php'>Download</a>
-	<H1>Final Results</H1>
-	<H2>5 mile</H2>
-	<table id="finisherTable1" class='finisherTable'>
-		<thead>
-			<tr>
-			<td colspan="2">Position</td>
-			<td>Number</td>
-			<td>Name</td>
-			<td>Race Time</td>
-			<td>Fins</td>		
-			</tr>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>
-	
-	<H2>2 mile</H2>
-	<table id="finisherTable2" class='finisherTable'>
-		<thead>
-			<tr>
-			<td colspan="2">Position</td>
-			<td>Number</td>
-			<td>Name</td>
-			<td>Race Time</td>
-			<td>Fins</td>		
-			</tr>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>
-	
-	<H2>1 mile</H2>
-	<table id="finisherTable3" class='finisherTable'>
-		<thead>
-			<tr>
-			<td colspan="2">Position</td>
-			<td>Number</td>
-			<td>Name</td>
-			<td>Race Time</td>
-			<td>Fins</td>		
-			</tr>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>
+	<H1>2014 Final Results</H1>
+		<div id="slideshow">
+			<?php include 'reports/5Mile.php' ?>			
+			<?php include 'reports/2Mile.php' ?>			
+			<?php include 'reports/1Mile.php' ?>			
+		</div>
+
 	<?php include 'layoutpostcontent.php' ?>
 </body>
 </html>

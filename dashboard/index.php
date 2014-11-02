@@ -19,7 +19,6 @@
 				<td>Number</td>
 				<td>Name</td>
 				<td>Race Time</td>
-				<td>Location</td>
 				<td>Fins</td>		
 				</tr>
 			</thead>

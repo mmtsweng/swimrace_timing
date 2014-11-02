@@ -1,6 +1,9 @@
 <html>
 <head>
-	<?php include 'layouthead.php' ?>
+	<?php 
+	include 'layouthead.php'; 
+	$showRaceTimes = false;
+	?>
 	<script>
 		showTruncated = false;
 	</script>

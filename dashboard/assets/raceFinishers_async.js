@@ -80,7 +80,6 @@ function showFinishersOverall()
 			var cap = $('<td class="cap ' + item.Cap +'"/>').html('&nbsp;');
 			var dtF = new Date(item.averageDate);
 			var dtS = new Date(item.StartTime);
-			var location = $('<td class="location"/>').html(item.City + ',' + item.State + ' ' + item.Country);
 			var finishTime = $('<td>').html('<span class="race">(' + item.Description + ')</span>  ' + DateDiff(dtS, dtF, showSeconds));
 			if (item.HasFins == '1')
 			{
@@ -92,7 +91,6 @@ function showFinishersOverall()
 				.append($('<td/>').html(item.SwimmerID))
 				.append($('<td/>').html(item.LastName + ', ' + item.FirstName))
 				.append(finishTime)	
-				.append(location)		
 				.append(hasfins);
 			$('#finisherTable tbody').append(tr);
 		}
