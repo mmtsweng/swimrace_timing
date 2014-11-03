@@ -204,6 +204,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND ts.RaceSwimmerID = rs.ID\n"
     . "AND r.ID = 3\n"
     . "AND rs.HasFins = 0\n"
+    . "AND s.Birthdate > DATE_SUB(CURDATE(), INTERVAL 100 YEAR) \n"
 	. "AND s.Birthdate < DATE_SUB(CURDATE(), INTERVAL 70 YEAR) \n"
 	. "GROUP BY ts.RaceSwimmerID\n"
     . "ORDER BY EndTime\n"
