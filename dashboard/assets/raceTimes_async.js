@@ -23,9 +23,12 @@ function callRaceTimesAPI()
 	.done (function(data)
 	{
 		//{"ID":"1","Description":"5 Mile","CapHex":"#FFFF00","StartTime":"2014-05-15 03:09:14"}
-		//alert(JSON.stringify(data));
+		console.log(JSON.stringify(data));
 		raceTimes =  data;
-		secondTimer = setInterval(showTimes, 1000);
+		if (data != null)
+		{
+			secondTimer = setInterval(showTimes, 1000);
+		}
 	})
 	.fail(function(xhr, desc, err)
 	{

@@ -7,7 +7,7 @@ var showFinals = false;
 //OnReady, start the timer
 $(function()
 {
-	callRaceFinishersAPI();
+		callRaceFinishersAPI();
 });
 
 
@@ -34,18 +34,29 @@ function callRaceFinishersAPI()
 		 * 	"averageDate":"2014-10-17 19:53:25","StartTime":"2014-10-17 19:50:41"}
 		 */
 		raceTimes =  data;
-		showFinishers();
-		if (showTruncated) 
-		{			
-			resetTable($('#finisherTable'), true);
-			setTimeout(callRaceFinishersAPI, 15000);
+		console.log(JSON.stringify(data));
+		if (raceTimes != null)
+		{
+			$('#scrollableTable').show();
+			showFinishers();
+			if (showTruncated) 
+			{			
+				resetTable($('#finisherTable'), true);
+				setTimeout(callRaceFinishersAPI, 15000);
+			}
+			else
+			{
+				if (!showFinals)
+				{
+					scroll(raceTimes.length);
+				}
+			}
 		}
 		else
 		{
-			if (!showFinals)
-			{
-				scroll(raceTimes.length);
-			}
+			$('#scrollableTable').hide();
+			console.log("No Data");
+			setTimeout(callRaceFinishersAPI, 5000);
 		}
 	})
 	.fail(function(xhr, desc, err)
