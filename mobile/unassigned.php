@@ -51,14 +51,10 @@
 <head>
 	<title>Dashboard</title>
 	<script type="text/javascript" src="assets/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript">
-
-		<?php
-			print "var times = jQuery.parseJSON('" . $response . "');";
-		?>
-	</script>
+	<?php include 'layouthead.php' ?>
 </head>
 <body>
+	<?php include 'layoutnav.php' ?>
 	<H1>Unassigned Swimmers</H1>
 	<table>
 	<?php

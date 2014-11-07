@@ -18,8 +18,10 @@
 	<title>Swimmers Finishing</title>
 	<script type="text/javascript" src="assets/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="assets/swimmer_async.js"></script>	
+	<?php include 'layouthead.php' ?>
 </head>
 <body>
+	<?php include 'layoutnav.php' ?>
 	<H1>Swimmer Finish</H1>
 	
 	<ul id='SwimmerList' class='SwimmerFinish'>

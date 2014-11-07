@@ -25,12 +25,14 @@
 		'RacerNumber'	=> $_POST['Number'],
 		'SwimmerID'		=> $_POST['SwimmerID'],
 		'RaceID'		=> $_POST['races'],
+		'Gender'		=> $_POST['Gender'],
+		'Birthdate'		=> $_POST['Birthdate'],
+		'City'			=> $_POST['City'],
+		'Country'		=> $_POST['Country'],
 		'HasFins'		=> $_POST['HasFins'],
 	);
 	$json = json_encode($data);
 	
-    //print($json);
-    
     //Post Changes
     $ch = curl_init('http://localhost:8080/swimrace_timing/api.php?r=editracer');                                                                      
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
@@ -41,6 +43,7 @@
 		'Content-Length: ' . strlen($json))                                                                       
 	);                                                                                                                   
  	$result = curl_exec($ch);
+ 	print $result;
     header("Location:" . $_SERVER["PHP_SELF"]);
     
 	?>
@@ -51,14 +54,10 @@
 <head>
 	<title>Dashboard</title>
 	<script type="text/javascript" src="assets/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript">
-
-		<?php
-			print "var times = jQuery.parseJSON('" . $response . "');";
-		?>
-	</script>
+	<?php include 'layouthead.php' ?>
 </head>
 <body>
+	<?php include 'layoutnav.php' ?>
 	<H1>Scheduled Swimmers</H1>
 	<table>
 	<?php
@@ -67,28 +66,28 @@
 		print "<form action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "' method='post'>";
 		print "<tr>";
 		print "<td>";
-		print $item['ID'] . "<input type='hidden' name='ID' id='ID' value='". $item['ID'] ."' />";
+		print "#:<input type='text' size=4 name='Number' id='racenumber' value='" . $item['RacerNumber'] . "' />";
+		print "<input type='hidden' name='ID' id='ID' value='". $item['ID'] ."' />";
 		print "</td>";
 		print "<td>";
 		print "<input type='hidden' name='SwimmerID' id='swimmerID' value='". $item['SwimmerID'] ."' />";
 		print $item['LastName'] . ", " . $item['FirstName'];
 		print "</td>";
-		print "<td>";
-		print $item['Description'];
-		print "</td>";
 		print "<td><select name='races'><option value='-1'>&nbsp;</option>";
 		foreach($races as $race)
 		{
 			print "<option value='".$race['ID']."' ";
-			if($item['Description']==$race['Description']) {print " selected ";}
+			if($item['Description']==$race['Description']) {print "selected ";}
 			print ">".$race['Description']."</option>";
 		}
 		print $item['Description'];
 		print "</select></td>";
+		print "<td><input type='text' name='Gender' id='Gender' value='" . $item['Gender'] . "' /></td>";
+		print "<td><input size='11' type='text' name='Birthdate' id='birthdate' value='" . $item['Birthdate'] . "' /></td>";
+		print "<td><input type='text' name='City' id='racenumber' value='" . $item['City'] . "' /></td>";
+		print "<td><input size='3' type='text' name='Country' id='racenumber' value='" . $item['Country'] . "' /></td>";
 		print "<td>";
-		print "#:<input type='text' name='Number' id='racenumber' value='" . $item['RacerNumber'] . "' />";
-		print "</td>";
-		print "<td>";
+
 		print "<input type='hidden' name='HasFins' value='0'>Fins:<input type='checkbox' name='HasFins' value='1' id='checkbox' ";
 			if($item['HasFins']=='1') {print " checked ";}
 		print "/>";

@@ -47,6 +47,7 @@ if (!empty($_POST)):
 <html>
 <head>
 	<title>Start Races</title>
+	<?php include 'layouthead.php' ?>
 	<script type="text/javascript" src="assets/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript">
 		
@@ -59,6 +60,7 @@ if (!empty($_POST)):
 	</script>
 </head>
 <body>
+	<?php include 'layoutnav.php' ?>
 	<H1>Start Races</H1>
 	<table>
 	<?php

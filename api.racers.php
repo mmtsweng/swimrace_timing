@@ -55,7 +55,9 @@ class Racers extends APIInterface
 	//API Method to GET Swimmers assigned to a race
 	public function racers()
 	{
-		$sql = "SELECT rs.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, r.Description, r.Cap, rs.HasFins ".
+		$sql = "SELECT rs.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, " .
+			"s.Gender, s.Birthdate, s.City, s.State, s.Country, ".
+			" r.Description, r.Cap, rs.HasFins ".
 			"FROM RaceSwimmers rs, Races r, Swimmers s ".
 			"WHERE rs.SwimmerID = s.ID ".
 			"AND rs.RaceID = r.ID ".
@@ -186,6 +188,10 @@ class Racers extends APIInterface
 			$swimmer = (int)$postjson['SwimmerID'];
 			$race = (int)$postjson['RaceID'];
 			$racernumber = (int)$postjson['RacerNumber'];
+			$gender = $postjson['Gender'];
+			$birthdate = $postjson['Birthdate'];
+			$city = $postjson['City'];
+			$country = $postjson['Country'];
 			$hasfins = (int)$postjson['HasFins'];
 			
 			$sql = "UPDATE RaceSwimmers ".
@@ -197,8 +203,18 @@ class Racers extends APIInterface
 			
 			$retval = mysql_query($sql, $this->db);
 			$resp = array('ID' => $id);
+			
+			$sql = "UPDATE Swimmers SET " .
+			"Gender='$gender', ".
+			"Birthdate='$birthdate', " .
+			"City='$city', " .
+			"Country='$country' " .
+			"WHERE ID=$swimmer";
+			$retval = mysql_query($sql, $this->db);
+			$resp = array('ID' => $id);
 		
 			$this->response(json_encode($resp), 200);
+			//$this->response($sql, 200);
 		}
 		catch (Exception $e)
 		{

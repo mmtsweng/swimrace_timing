@@ -17,6 +17,7 @@
 <html>
 <head>
 	<title>Dashboard</title>
+	<?php include 'layouthead.php' ?>
 	<link href="assets/jquery.circliful.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="assets/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="assets/jquery.circliful.min.js"></script>
@@ -35,6 +36,7 @@
 	</script>
 </head>
 <body>
+	<?php include 'layoutnav.php' ?>
 	<H1>Swimmer / Finisher counts</H1>
 	<table>
 	<?php

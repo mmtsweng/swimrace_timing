@@ -37,9 +37,11 @@ class Swimmers extends APIInterface
 			$lastname = $postjson['LastName'];
 			$gender = $postjson['Gender'];
 			$birthdate = $postjson['Birthdate'];
+			$city = $postjson['City'];
+			$country = $postjson['Country'];
 			
-			$sql = "INSERT into Swimmers (FirstName, LastName, Gender, Birthdate) ".
-			"VALUES ('$firstname', '$lastname', '$gender', '$birthdate')";
+			$sql = "INSERT into Swimmers (FirstName, LastName, Gender, Birthdate, City, Country) ".
+			"VALUES ('$firstname', '$lastname', '$gender', '$birthdate', '$city', '$country')";
 			
 			$retval = mysql_query($sql, $this->db);
 			$sqlid = mysql_insert_id();	
