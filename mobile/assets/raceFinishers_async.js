@@ -39,18 +39,7 @@ function callRaceFinishersAPI()
 		{
 			$('#scrollableTable').show();
 			showFinishers();
-			if (showTruncated) 
-			{			
-				resetTable($('#finisherTable'), true);
-				setTimeout(callRaceFinishersAPI, 15000);
-			}
-			else
-			{
-				if (!showFinals)
-				{
-					scroll(raceFinishers.length);
-				}
-			}
+			setTimeout(callRaceFinishersAPI, 15000);
 		}
 		else
 		{
@@ -66,79 +55,27 @@ function callRaceFinishersAPI()
 	;		
 }
 
-//Function to show the finishers 
-function showFinishers()
-{
-	if (showOverall) 
-	{
-		showFinishersOverall();
-	}
-	else
-	{
-		showFinishersByRace();
-	}
-}
 
 //Function to show the overall order of finish
-function showFinishersOverall()
+function showFinishers()
 {
 	$('#finisherTable tbody tr').remove();
 	$.each(raceFinishers, function(idx,item)
 	{
 		if (!showTruncated || idx >= raceFinishers.length - 10)
 		{
-			var hasfins = $('<td>').html('&nbsp;');
 			var cap = $('<td class="cap ' + item.Cap +'"/>').html('&nbsp;');
 			var dtF = new Date(item.averageDate);
 			var dtS = new Date(item.StartTime);
 			var finishTime = $('<td>').html('<span class="race">(' + item.Description + ')</span>  ' + DateDiff(dtS, dtF, showSeconds));
-			if (item.HasFins == '1')
-			{
-				$(hasfins).addClass('hasFins');
-			}
 			var tr = $('<tr/>')
 				.append(cap)			
 				.append($('<td/>').html(idx+1))
 				.append($('<td/>').html(item.RacerNumber))
 				.append($('<td/>').html(item.LastName + ', ' + item.FirstName))
 				.append(finishTime)	
-				.append(hasfins);
 			$('#finisherTable tbody').append(tr);
 		}
 	});
 }
 
-//Function to show order of finish by race
-function showFinishersByRace()
-{
-	var orders = [0, 0, 0];
-	$('#finisherTable1 tbody tr').remove();
-	$('#finisherTable2 tbody tr').remove();
-	$('#finisherTable3 tbody tr').remove();
-	$.each(raceFinishers, function(idx,item)
-	{
-		orders[item.ID-1]++;
-		if (!showTruncated || idx >= raceFinishers.length - 10)
-		{
-			var hasfins = $('<td>').html('&nbsp;');
-			var cap = $('<td class="cap ' + item.Cap +'"/>').html('&nbsp;');
-			var dtF = new Date(item.averageDate);
-			var dtS = new Date(item.StartTime);
-			var location = $('<td class="location"/>').html(item.City + ',' + item.State + ' ' + item.Country);
-			var finishTime = $('<td>').html(DateDiff(dtS, dtF, showSeconds));
-			if (item.HasFins == '1')
-			{
-				$(hasfins).addClass('hasFins');
-			}
-			var tr = $('<tr/>')
-				.append(cap)			
-				.append($('<td/>').html(orders[item.ID-1]))
-				.append($('<td/>').html(item.RacerNumber))
-				.append($('<td/>').html(item.LastName + ', ' + item.FirstName))
-				.append(finishTime)
-				.append(location)				
-				.append(hasfins);
-			$('#finisherTable' + item.ID + ' tbody').append(tr);
-		}
-	});
-}

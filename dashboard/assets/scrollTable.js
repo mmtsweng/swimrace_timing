@@ -66,6 +66,6 @@ function notify()
 //Method to scroll to the end of the table
 function scrollToView()
 {
-	$('#finishedScrolling').animatescroll({element: '#scrollableTable', scrollSpeed: 20000, onScrollEnd: notify});
+	$('#finishedScrolling').animatescroll({element: '#scrollableTable', scrollSpeed: 120000, onScrollEnd: notify});
 }
 

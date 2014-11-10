@@ -61,7 +61,7 @@ class Racers extends APIInterface
 			"FROM RaceSwimmers rs, Races r, Swimmers s ".
 			"WHERE rs.SwimmerID = s.ID ".
 			"AND rs.RaceID = r.ID ".
-			"ORDER BY rs.RaceID, rs.RacerNumber";
+			"ORDER BY s.LastName, s.FirstName";
 		$query = mysql_query($sql, $this->db);
 		if (mysql_num_rows($query) > 0)
 		{

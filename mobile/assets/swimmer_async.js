@@ -9,20 +9,30 @@ $(function()
 	{
 		{
 			//Check for [Enter]
-			if (e.keyCode==13)
+			if (e.keyCode==13 || e.keyCode==10 || e.keyCode==9)
 			{
-				//Load swimmer results
-				var id = $('#RacerText').val();
-				var finishTime = new Date();
-				CallSwimmerFinishAPI(id, finishTime);						
-								
-				//Clear textbox
-				$('#RacerText').val('');
+				saveSwimmerTime();
 			}
 		}
 	});
+	
+	$('#RacerGo').click(function (e)
+	{
+		saveSwimmerTime();
+	});
 });
 
+//Save this racer number's finish time
+function saveSwimmerTime()
+{
+	//Load swimmer results
+	var id = $('#RacerText').val();
+	var finishTime = new Date();
+	CallSwimmerFinishAPI(id, finishTime);						
+				
+	//Clear textbox
+	$('#RacerText').val('');
+}
 
 //API Call
 function CallSwimmerFinishAPI(id, finishtime)

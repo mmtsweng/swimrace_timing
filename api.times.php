@@ -45,7 +45,9 @@ class Times extends APIInterface
 			$postjson = json_decode(file_get_contents("php://input"),true);
 			$race = (int)$postjson['RaceID'];
 			$status = 1;
-			$starttime = new DateTime($postjson['StartTime']);
+			//$starttime = new DateTime($postjson['StartTime']);
+			$starttime = new DateTime();
+			//$starttime->setTimezone(new DateTimeZone('America/St_Thomas'));
 			$mysqldate = $starttime->format("Y-m-d H:i:s");
 			
 			$updatesql = "UPDATE TimeRace SET Status = 0 WHERE RaceID = $race";
@@ -75,7 +77,9 @@ class Times extends APIInterface
 			$racernum = (int)$postjson['RacerNumber'];
 			$status = 1;
 			$result = array();
-			$finishtime = new DateTime($postjson['FinishTime']);
+			//$finishtime = new DateTime($postjson['FinishTime']);
+			$finishtime = new DateTime();
+			//$finishtime->setTimezone(new DateTimeZone('America/St_Thomas'));
 			$mysqldate = $finishtime->format("Y-m-d H:i:s");
 			
 			$sql = "SELECT ID From RaceSwimmers WHERE RacerNumber = $racernum limit 1";

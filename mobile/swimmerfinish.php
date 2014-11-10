@@ -30,7 +30,8 @@
 	<table>
 	<tr>
 		<td>Racer Number</td>
-		<td><input type='text' name='RacerText' id='RacerText' value='' /></td>
+		<td><input type='number' name='RacerText' id='RacerText' value='' /></td>
+		<td><input type='button' id='RacerGo' value='Save' /?</td>
 	</tr>	
 	</table>
 

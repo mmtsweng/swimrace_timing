@@ -21,6 +21,7 @@ background-image : url('/swimrace_timing/dashboard/assets/fulldesign.png ');
 background-attachment : fixed;
 background-repeat : no-repeat;
 background-size: 100%, auto;
+/*background-position: 25px 15px*/
 margin: 30px 30px 30px 30px;
 }
 
@@ -30,7 +31,7 @@ float: right;
 font-size: 8pt;
 height: 100%;
 display: block;
-margin-right: 10px;
+margin-right: 5px;
 /*border: red 1px solid;*/
 }
 .raceTimes p
@@ -43,9 +44,9 @@ text-align: center;
 .pageContent{
 float: left;
 margin-top: 15%;
-margin-left: 8%;
+margin-left: 6%;
 display: block;
-width:80%;
+width:79%;
 }
 .pageContent h1, .pageContent h2, .pageContent h3{
 text-align: center;
