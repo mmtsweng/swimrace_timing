@@ -5,6 +5,7 @@ if ($result->num_rows > 0) {
 		. "<tr><td>Position</td>"
 		. "<td>Time</td>"
 		. "<td>Name</td>"
+		. "<td>Age</td>"
 		. "<td>Location</td>"
 		. "</tr></thead><tbody>";
     // output data of each row
@@ -13,6 +14,7 @@ if ($result->num_rows > 0) {
         print "<tr><td>".$position."</td><td>"
 			.timerFormat($row["StartTime"],$row["EndTime"])."</td><td>"
 			.$row["LastName"].", ".$row["FirstName"]."</td><td>"
+			.$row["Age"]."</td><td>"
 			.$row["City"]. ",".$row["State"]." ".$row["Country"]
 			."</td></tr>";
         $position++;
