@@ -1,7 +1,6 @@
 <html>
 <head>
 	<?php include 'layouthead_simple.php'; 
-	include 'reports/reportTimes.php'; 
 	$showRaceTimes = false; ?>
 	<script>
 		showSeconds = true;

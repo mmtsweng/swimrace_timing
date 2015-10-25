@@ -27,7 +27,7 @@ function saveSwimmerTime()
 {
 	//Load swimmer results
 	var id = $('#RacerText').val();
-	var finishTime = new Date();
+	var finishTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
 	CallSwimmerFinishAPI(id, finishTime);						
 				
 	//Clear textbox
@@ -54,9 +54,9 @@ function CallSwimmerFinishAPI(id, finishtime)
 			{
 				//alert (JSON.stringify(data));
 				//[{"ID":"2","TimeID":"14","RacerNumber":"123","firstname":"Matt","lastname":"Brown","Description":"5 Mile","CapHex":"#FFFF00"}]
-				var dtF = new Date(item.FinishTime);
-				var dtS = new Date(item.StartTime);
-				var li = '<li><span style="background-color: ' + item.CapHex + '">' + item.RacerNumber + '</span> -- ' + item.lastname + ", " + item.firstname + "   " + DateDiff(dtS, dtF) + '</li>';				
+				var dtF = parseDT(item.FinishTime);
+				var dtS = parseDT(item.StartTime);
+				var li = '<li><span style="background-color: ' + item.CapHex + '">' + item.RacerNumber + '</span> -- ' + item.lastname + ", " + item.firstname + "   " + DateDiff(dtS, dtF, true) + '</li>';				
 				$('ul#SwimmerList').append(li);
 				
 				//Limit to 5
@@ -71,31 +71,4 @@ function CallSwimmerFinishAPI(id, finishtime)
 			alert(desc);
 		})
 		;		
-}
-
-//DateDiff
-function DateDiff(starttime, endTime) 
-{
-	var timeDiff = endTime - starttime;
-	console.log(starttime + "vs" + endTime);
-
-	// Calculate H:MM:SS
-	var timeDiff = timeDiff / 1000;
-	var seconds = Math.round(timeDiff % 60);
-	timeDiff = Math.floor(timeDiff / 60);
-	var minutes = Math.round(timeDiff % 60);
-	timeDiff = Math.floor(timeDiff / 60);
-	var hours = Math.round(timeDiff % 24);
-	timeDiff = Math.floor(timeDiff / 24);
-	var days = timeDiff ;
-	
-	return (hours + " : " + padLeft(minutes));
-}
-		
-//Function to add a leading zero to single diget time frames
-function padLeft(time)
-{
-	var pad = "00";
-	var str = "" + time;
-	return pad.substring(0, pad.length - str.length) + str;
 }

@@ -12,7 +12,7 @@ if (!empty($_POST)):
 	);
 	$json = json_encode($data);
 	
-    print($json);
+    //print($json);
     
     //Post Changes
     $ch = curl_init($api . 'startrace');                                                                      
@@ -25,7 +25,7 @@ if (!empty($_POST)):
 	);                                                                                                                   
  	$result = curl_exec($ch);
     print ($ch);
-    //header("Location:" . $_SERVER["PHP_SELF"]);
+    header("Location:" . $_SERVER["PHP_SELF"]);
     
 	?>
 
@@ -49,7 +49,6 @@ if (!empty($_POST)):
 <head>
 	<title>Start Races</title>
 	<?php include 'layouthead.php' ?>
-	<script type="text/javascript" src="assets/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript">
 		
 		//OnReady, start the timer

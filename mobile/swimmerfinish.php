@@ -16,9 +16,8 @@
 <html>
 <head>
 	<title>Swimmers Finishing</title>
-	<script type="text/javascript" src="assets/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="assets/swimmer_async.js"></script>	
 	<?php include 'layouthead.php' ?>
+	<script type="text/javascript" src="assets/swimmer_async.js"></script>	
 </head>
 <body>
 	<?php include 'layoutnav.php' ?>

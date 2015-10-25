@@ -65,8 +65,8 @@ function showFinishers()
 		if (!showTruncated || idx >= raceFinishers.length - 10)
 		{
 			var cap = $('<td class="cap ' + item.Cap +'"/>').html('&nbsp;');
-			var dtF = new Date(item.averageDate);
-			var dtS = new Date(item.StartTime);
+			var dtF = parseDT(item.averageDate);
+			var dtS = parseDT(item.StartTime);
 			var finishTime = $('<td>').html('<span class="race">(' + item.Description + ')</span>  ' + DateDiff(dtS, dtF, showSeconds));
 			var tr = $('<tr/>')
 				.append(cap)			

@@ -45,7 +45,7 @@ function showTimes()
 	{
 		if (obj != null && obj.StartTime != null)
 		{	
-			displayElapsed(new Date(Date.parse(obj.StartTime)), $("#racetime" + obj.ID));
+			displayElapsed(parseDT(obj.StartTime), $("#racetime" + obj.ID));
 		}
 		else
 		{
@@ -57,7 +57,6 @@ function showTimes()
 //Display the elapsed time in the element
 function displayElapsed(starttime, el) 
 {
-	
 	var endTime = new Date();
 	var time = DateDiff(endTime, starttime, true);
 	//console.log(endTime + " - " + starttime);
@@ -65,44 +64,3 @@ function displayElapsed(starttime, el)
 	$(el).text(time);
 }
 
-function DateDiff(starttime, endtime, showSeconds)
-{
-	var timeDiff = Math.abs(endtime - starttime) / 1000;
-
-	var days = Math.floor(timeDiff / 86400);
-	timeDiff -= days * 86400;
-	var hours = Math.floor(timeDiff / 3600) % 24;
-	timeDiff -= hours * 3600;
-	var minutes = Math.floor(timeDiff / 60) % 60;
-	timeDiff -= minutes * 60;
-	var seconds = Math.floor(timeDiff % 60);
-
-/*
-	// Calculate H:MM:SS
-	var seconds = Math.round(timeDiff % 60);
-	timeDiff = Math.floor(timeDiff / 60);
-	var minutes = Math.round(timeDiff % 60);
-	timeDiff = Math.floor(timeDiff / 60);
-	var hours = Math.round(timeDiff % 24);
-	timeDiff = Math.floor(timeDiff / 24);
-	var days = timeDiff ;
-	*/
-	
-	if (showSeconds)
-	{
-		return hours + " : " + padLeft(minutes) + " : " + padLeft(seconds);
-	}
-	else
-	{
-		return hours + " : " + padLeft(minutes);
-	}
-	
-}
-
-//Function to add a leading zero to single diget time frames
-function padLeft(time)
-{
-	var pad = "00";
-	var str = "" + time;
-	return pad.substring(0, pad.length - str.length) + str;
-}

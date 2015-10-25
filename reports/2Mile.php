@@ -3,6 +3,7 @@ const DB_SERVER="localhost";
 const DB_USER = "root";
 const DB_PASSWORD = "asdfasdf";
 const DB = "Swimrace";
+include 'timerhelper.php'; 
 
 /* Base SQL
 
@@ -14,10 +15,10 @@ WHERE rs.SwimmerID = s.ID
 AND rs.RaceID = r.ID
 AND tr.RaceID = r.ID
 AND ts.RaceSwimmerID = rs.ID
-AND r.ID = 3
+AND r.ID = 1
 GROUP BY ts.RaceSwimmerID
 ORDER BY EndTime
-Limit 
+Limit 5
 
 */
 
@@ -27,7 +28,7 @@ if ($conn->connect_error) {
 	print "Database Connection Error: " . $conn->connect_error;
     die("Connection failed: " . $conn->connect_error);
 } 
-$race = "1 Mile";
+$race = "2 Mile";
 
 //Overall
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
@@ -38,11 +39,11 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"
     . "GROUP BY ts.RaceSwimmerID\n"
     . "ORDER BY EndTime\n"
-    . "Limit Limit 500";
+    . "Limit 500";
 $result = $conn->query($sql);
 print "<div><h2>". $race . " - Overall</h2>";
 include "printResults.php";
@@ -57,7 +58,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"
     . "AND s.Gender = 'M'\n"
     . "AND TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) BETWEEN 0 AND 18 \n"
@@ -76,7 +77,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"
     . "AND s.Gender = 'F'\n"
     . "AND TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) BETWEEN 0 AND 18 \n"
@@ -97,7 +98,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"
     . "AND s.Gender = 'M'\n"
     . "AND TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) BETWEEN 19 AND 199 \n"
@@ -116,7 +117,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"
     . "AND s.Gender = 'F'\n"
     . "AND TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) BETWEEN 19 AND 199 \n"
@@ -137,7 +138,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"
     . "AND s.Gender = 'M'\n"
     . "AND TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) BETWEEN 19 AND 29 \n"
@@ -156,7 +157,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"
     . "AND s.Gender = 'F'\n"
     . "AND TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) BETWEEN 19 AND 29 \n"
@@ -176,7 +177,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"
     . "AND s.Gender = 'M'\n"
     . "AND TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) BETWEEN 30 AND 39 \n"
@@ -195,7 +196,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"
     . "AND s.Gender = 'F'\n"
     . "AND TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) BETWEEN 30 AND 39 \n"
@@ -215,7 +216,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"
     . "AND s.Gender = 'M'\n"
     . "AND TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) BETWEEN 40 AND 49 \n"
@@ -234,7 +235,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"
     . "AND s.Gender = 'F'\n"
     . "AND TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) BETWEEN 40 AND 49 \n"
@@ -254,7 +255,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"
     . "AND s.Gender = 'M'\n"
     . "AND TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) BETWEEN 50 AND 59 \n"
@@ -273,7 +274,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"
     . "AND s.Gender = 'F'\n"
     . "AND TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) BETWEEN 50 AND 59 \n"
@@ -294,7 +295,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"    
     . "AND s.Gender = 'M'\n"
     . "AND TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) BETWEEN 60 AND 69 \n"
@@ -313,7 +314,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"    
     . "AND s.Gender = 'F'\n"
     . "AND TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) BETWEEN 60 AND 69 \n"
@@ -334,7 +335,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"   
     . "AND s.Gender = 'M'\n"
     . "AND TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) BETWEEN 70 AND 199 \n"
@@ -353,7 +354,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 0\n"   
     . "AND s.Gender = 'F'\n"
     . "AND TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) BETWEEN 70 AND 199 \n"
@@ -375,7 +376,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.RaceID = r.ID \n"
     . "AND tr.RaceID = r.ID\n"
     . "AND ts.RaceSwimmerID = rs.ID\n"
-    . "AND r.ID = 3\n"
+    . "AND r.ID = 2\n"
     . "AND rs.HasFins = 1\n"
 	. "GROUP BY ts.RaceSwimmerID\n"
     . "ORDER BY EndTime\n"

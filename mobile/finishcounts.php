@@ -19,7 +19,6 @@
 	<title>Dashboard</title>
 	<?php include 'layouthead.php' ?>
 	<link href="assets/jquery.circliful.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="assets/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="assets/jquery.circliful.min.js"></script>
 	<script type="text/javascript">
 		<?php

@@ -1,8 +1,9 @@
 <?php
 const DB_SERVER="localhost";
 const DB_USER = "root";
-const DB_PASSWORD = "asdfasdf";
+const DB_PASSWORD = "swimvast";
 const DB = "Swimrace";
+include 'timerhelper.php'; 
 
 /* Base SQL
 

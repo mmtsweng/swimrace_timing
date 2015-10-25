@@ -53,7 +53,6 @@
 <html>
 <head>
 	<title>Dashboard</title>
-	<script type="text/javascript" src="assets/jquery-1.11.1.min.js"></script>
 	<?php include 'layouthead.php' ?>
 </head>
 <body>
