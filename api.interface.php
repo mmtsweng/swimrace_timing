@@ -6,7 +6,7 @@ class APIInterface extends REST
 	public $data = "";
 	const DB_SERVER="localhost";
 	const DB_USER = "root";
-	const DB_PASSWORD = "asdfasdf";
+	const DB_PASSWORD = "swimvast";
 	const DB = "Swimrace";
 	
 	public $db = NULL;

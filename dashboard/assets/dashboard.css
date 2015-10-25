@@ -17,7 +17,7 @@ padding-left: 25px;
 }
 
 body{
-background-image : url('/swimrace_timing/dashboard/assets/fulldesign.png ');
+background-image : url('/dashboard/assets/fulldesign.png ');
 background-attachment : fixed;
 background-repeat : no-repeat;
 background-size: 100%, auto;
@@ -78,22 +78,22 @@ background-repeat: no-repeat;
 }
 .finisherTable .Yellow
 {
-background-image : url('/swimrace_timing/dashboard/assets/yellowcap.png');
+background-image : url('/dashboard/assets/yellowcap.png');
 }
 .finisherTable .Pink
 {
-background-image : url('/swimrace_timing/dashboard/assets/pinkcap.png');
+background-image : url('/dashboard/assets/pinkcap.png');
 }
 .finisherTable .Green
 {
-background-image : url('/swimrace_timing/dashboard/assets/greencap.png');
+background-image : url('/dashboard/assets/greencap.png');
 }
 .finisherTable .hasFins
 {
 background-position: center;
 background-size: 30px 30px;
 background-repeat: no-repeat;
-background-image : url('/swimrace_timing/dashboard/assets/fins.png');
+background-image : url('/dashboard/assets/fins.png');
 }
 .finisherTable .location
 {

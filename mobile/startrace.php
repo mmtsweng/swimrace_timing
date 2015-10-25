@@ -12,10 +12,10 @@ if (!empty($_POST)):
 	);
 	$json = json_encode($data);
 	
-    //print($json);
+    print($json);
     
     //Post Changes
-    $ch = curl_init('http://localhost:8080/swimrace_timing/api.php?r=startrace');                                                                      
+    $ch = curl_init($api . 'startrace');                                                                      
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $json);                                                                  
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
@@ -24,7 +24,8 @@ if (!empty($_POST)):
 		'Content-Length: ' . strlen($json))                                                                       
 	);                                                                                                                   
  	$result = curl_exec($ch);
-    header("Location:" . $_SERVER["PHP_SELF"]);
+    print ($ch);
+    //header("Location:" . $_SERVER["PHP_SELF"]);
     
 	?>
 
@@ -54,7 +55,7 @@ if (!empty($_POST)):
 		//OnReady, start the timer
 		function startRace(raceid)
 		{
-			$('#StartTime' + raceid).val(new Date());
+			$('#StartTime' + raceid).val(new Date().toISOString().slice(0, 19).replace('T', ' '));
 			$('#frm' + raceid).submit();
 		}
 	</script>
@@ -81,6 +82,8 @@ if (!empty($_POST)):
 			print "</td>";
 			print "<td>";
 			print "<input type='button' onclick='startRace(". $item['ID'] . ");' name='button' value='Start' id='submit' />";
+		
+		
 			print "</td>";
 		}
 		else

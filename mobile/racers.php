@@ -34,7 +34,7 @@
 	$json = json_encode($data);
 	
     //Post Changes
-    $ch = curl_init('http://localhost:8080/swimrace_timing/api.php?r=editracer');                                                                      
+    $ch = curl_init('http://localhost/api.php?r=editracer');                                                                      
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $json);                                                                  
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      

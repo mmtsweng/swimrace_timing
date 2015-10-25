@@ -42,7 +42,7 @@ function CallSwimmerFinishAPI(id, finishtime)
 		
 		$.ajax(
 		{
-			url: '/swimrace_timing/api.php?r=swimmerfinish',
+			url: '/api.php?r=swimmerfinish',
 			type: 'post',
 			contentType: 'application/json',
 			dataType: 'json',

@@ -15,7 +15,7 @@ function callRaceTimesAPI()
 	clearInterval(secondTimer);
 	$.ajax(
 	{
-		url: '/swimrace_timing/api.php?r=racetimes',
+		url: '/api.php?r=racetimes',
 		type: 'get',
 		contentType: 'application/json',
 		dataType: 'json'

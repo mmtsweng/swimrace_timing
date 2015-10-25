@@ -19,7 +19,7 @@
     //print($json);
     
     //Post Changes
-    $ch = curl_init('http://localhost:8080/swimrace_timing/api.php?r=addswimmer');                                                                      
+    $ch = curl_init($api . 'addswimmer');                                                                      
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $json);                                                                  
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      

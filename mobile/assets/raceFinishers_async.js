@@ -17,7 +17,7 @@ function callRaceFinishersAPI()
 {
 	$.ajax(
 	{
-		url: '/swimrace_timing/api.php?r=finishorder',
+		url: '/api.php?r=finishorder',
 		type: 'get',
 		contentType: 'application/json',
 		dataType: 'json'
