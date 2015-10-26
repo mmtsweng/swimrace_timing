@@ -1,6 +1,6 @@
 <html>
 <head>
-	<?php include 'layouthead_simple.php'; 
+	<?php include 'layouthead.php'; 
 	$showRaceTimes = false; ?>
 	<script>
 		showSeconds = true;
@@ -28,9 +28,9 @@
 	<?php include 'layoutprecontent.php' ?>
 	<H1>2015 Final Results</H1>
 		<div id="slideshow">
-			<?php include '/reports/5Mile.php' ?>			
-			<?php include '/reports/2Mile.php' ?>			
-			<?php include '/reports/1Mile.php' ?>			
+			<?php include '../reports/5Mile.php' ?>			
+			<?php include '../reports/2Mile.php' ?>			
+			<?php include '../reports/1Mile.php' ?>			
 		</div>
 
 	<?php include 'layoutpostcontent.php' ?>

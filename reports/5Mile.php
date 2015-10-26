@@ -3,7 +3,7 @@ const DB_SERVER="localhost";
 const DB_USER = "root";
 const DB_PASSWORD = "swimvast";
 const DB = "Swimrace";
-include 'timerhelper.php'; 
+include_once 'timerhelper.php'; 
 
 /* Base SQL
 
