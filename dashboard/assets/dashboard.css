@@ -17,7 +17,7 @@ padding-left: 25px;
 }
 
 body{
-background-image : url('/dashboard/assets/fulldesign.png ');
+background-image : url('/dashboard/assets/fulldesign2015.png ');
 background-attachment : fixed;
 background-repeat : no-repeat;
 background-size: 100%, auto;
@@ -27,12 +27,10 @@ margin: 30px 30px 30px 30px;
 
 .raceTimes
 {
-float: right;
-font-size: 8pt;
-height: 100%;
-display: block;
-margin-right: 5px;
-/*border: red 1px solid;*/
+	font-size: 8pt;
+	position:absolute;
+	top:20;
+	right:20;
 }
 .raceTimes p
 {
@@ -41,12 +39,15 @@ clear: both;
 text-align: center;
 }
 
-.pageContent{
+.pageContent
+{
 float: left;
-margin-top: 15%;
-margin-left: 6%;
+margin-top: 90px;
+margin-left: 100px;
 display: block;
-width:79%;
+width:80%;
+/* border: blue 1px solid; */
+
 }
 .pageContent h1, .pageContent h2, .pageContent h3{
 text-align: center;
@@ -57,12 +58,14 @@ text-align: center;
 .finisherTable td
 {
 padding-left: 10px;
-font-size: 14pt;
+font-size: 12pt;
+font-weight: bold;
 padding-top: 10px;
 }
 .finisherTable thead td
 {
 font-weight: bold;
+color: Red;
 }
 .finisherTable .race
 {
@@ -97,6 +100,7 @@ background-image : url('/dashboard/assets/fins.png');
 }
 .finisherTable .location
 {
+	text-align: right;
 }
 
 /* SCROLLING */
@@ -104,6 +108,8 @@ background-image : url('/dashboard/assets/fins.png');
 {
 height: 60%;
 overflow: hidden;
+width: 90%;
+/* border: red 1px solid; */
 }
 #finishedScrolling
 {

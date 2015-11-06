@@ -38,10 +38,10 @@ class Swimmers extends APIInterface
 			$gender = $postjson['Gender'];
 			$birthdate = $postjson['Birthdate'];
 			$city = $postjson['City'];
-			$country = $postjson['Country'];
+			$state = $postjson['State'];
 			
-			$sql = "INSERT into Swimmers (FirstName, LastName, Gender, Birthdate, City, Country) ".
-			"VALUES ('$firstname', '$lastname', '$gender', '$birthdate', '$city', '$country')";
+			$sql = "INSERT into Swimmers (FirstName, LastName, Gender, Birthdate, City, State) ".
+			"VALUES ('$firstname', '$lastname', '$gender', '$birthdate', '$city', '$state')";
 			
 			$retval = mysql_query($sql, $this->db);
 			$sqlid = mysql_insert_id();	

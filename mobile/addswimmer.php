@@ -12,7 +12,7 @@
 		'Gender'		=> $_POST['Gender'],
 		'Birthdate'		=> $_POST['Birthdate'],
 		'City'			=> $_POST['City'],
-		'Country'		=> $_POST['Country'],
+		'Country'		=> $_POST['State'],
 	);
 	$json = json_encode($data);
 	
@@ -51,7 +51,7 @@
 		print "<td><input type='text' name='Gender' id='Gender' value='MF' /></td>";
 		print "<td><input size='11' type='text' name='Birthdate' id='birthdate' value='DOB' /></td>";
 		print "<td><input type='text' name='City' id='racenumber' value='City' /></td>";
-		print "<td><input size='3' type='text' name='Country' id='racenumber' value='Country' /></td>";
+		print "<td><input size='3' type='text' name='Country' id='racenumber' value='State' /></td>";
 		print "<td>";
 		print "<input type='submit' name='button' value='Add' id='submit' />";
 		print "</td>";

@@ -1,9 +1,11 @@
 <html>
 <head>
 	<?php include 'layouthead.php' ?>
+	<script type="text/javascript" src="/dashboard/assets/scrollTable.js"></script>
 	<script>
-		showTruncated = true;
+		showTruncated = false;
 		showOverall = true;
+		scroll(400);
 	</script>
 </head>
 <body>
@@ -17,7 +19,7 @@
 				<tr>
 				<td colspan="2">Position</td>
 				<td>Number</td>
-				<td>Name</td>
+				<td colspan="2">Name</td>
 				<td>Race Time</td>
 				<td>Fins</td>		
 				</tr>

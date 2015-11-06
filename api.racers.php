@@ -191,7 +191,7 @@ class Racers extends APIInterface
 			$gender = $postjson['Gender'];
 			$birthdate = $postjson['Birthdate'];
 			$city = $postjson['City'];
-			$country = $postjson['Country'];
+			$state = $postjson['State'];
 			$hasfins = (int)$postjson['HasFins'];
 			
 			$sql = "UPDATE RaceSwimmers ".
@@ -207,8 +207,8 @@ class Racers extends APIInterface
 			$sql = "UPDATE Swimmers SET " .
 			"Gender='$gender', ".
 			"Birthdate='$birthdate', " .
-			"City='$city', " .
-			"Country='$country' " .
+			"City='$city',s " .
+			"State='$state' " .
 			"WHERE ID=$swimmer";
 			$retval = mysql_query($sql, $this->db);
 			$resp = array('ID' => $id);

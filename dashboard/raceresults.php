@@ -19,7 +19,7 @@
 				<tr>
 				<td colspan="2">Position</td>
 				<td>Number</td>
-				<td>Name</td>
+				<td colspan="2">Name</td>
 				<td>Race Time</td>
 				<td>Location</td>
 				<td>Fins</td>		

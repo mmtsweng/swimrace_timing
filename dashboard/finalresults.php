@@ -6,6 +6,7 @@
 		showSeconds = true;
 		showFinals = true;
 		showTruncated = false;
+		showTimes = false;
 		
 		$(function()
 		{
