@@ -13,6 +13,7 @@
 			//Hide all divs
 			$("#slideshow > div:gt(0)").hide();
 			
+			
 			setInterval(function() {
 				$('#slideshow > div:first')
 					.fadeOut(2000)
@@ -30,8 +31,8 @@
 	<H1>2015 Final Results</H1>
 		<div id="slideshow">
 			<?php include '../reports/5Mile.php' ?>			
-			<?php include '../reports/2Mile.php' ?>			
-			<?php include '../reports/1Mile.php' ?>			
+			<?php /*include '../reports/2Mile.php' */?>			
+			<?php /*include '../reports/1Mile.php' */?>			
 		</div>
 
 	<?php include 'layoutpostcontent.php' ?>

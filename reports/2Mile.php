@@ -1,10 +1,7 @@
 <?php
-const DB_SERVER="localhost";
-const DB_USER = "root";
-const DB_PASSWORD = "swimvast";
-const DB = "Swimrace";
+include_once("dbConnections.php");
 include_once("timerhelper.php");
-
+include_once("printResults.php");
 
 /* Base SQL
 
@@ -46,9 +43,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - Overall</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - Overall");
+ 
 
 //18 and under
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
@@ -67,9 +63,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - 18 and Under Male</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - 18 and Under Male");
+ 
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
 	. "s.City, s.State, s.Country, TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) as Age," 
 	. "FROM_UNIXTIME(AVG(UNIX_TIMESTAMP(ts.FinishTime))) AS EndTime, tr.StartTime\n"
@@ -86,9 +81,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - 18 and Under Female</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - 18 and Under Female");
+ 
 
 //19 and over
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
@@ -107,9 +101,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - 19 and Over Male</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - 19 and Over Male");
+ 
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
 	. "s.City, s.State, s.Country, TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) as Age," 
 	. "FROM_UNIXTIME(AVG(UNIX_TIMESTAMP(ts.FinishTime))) AS EndTime, tr.StartTime\n"
@@ -126,9 +119,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - 19 and Over Female</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - 19 and Over Female");
+ 
 
 //19-29
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
@@ -147,9 +139,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - 19 to 29 Male</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - 19 to 29 Male");
+ 
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
 	. "s.City, s.State, s.Country, TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) as Age," 
 	. "FROM_UNIXTIME(AVG(UNIX_TIMESTAMP(ts.FinishTime))) AS EndTime, tr.StartTime\n"
@@ -166,9 +157,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . "- 19 to 29 Female</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - 19 to 29 Female");
+ 
 //30-39
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
 	. "s.City, s.State, s.Country, TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) as Age," 
@@ -186,9 +176,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - 30 to 39 Male</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - 30 to 39 Male");
+ 
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
 	. "s.City, s.State, s.Country, TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) as Age," 
 	. "FROM_UNIXTIME(AVG(UNIX_TIMESTAMP(ts.FinishTime))) AS EndTime, tr.StartTime\n"
@@ -205,9 +194,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - 30 to 39 Female</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - 30 to 39 Female");
+ 
 //40-49
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
 	. "s.City, s.State, s.Country, TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) as Age," 
@@ -225,9 +213,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - 40 to 49 Male</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - 40 to 49 Male");
+ 
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
 	. "s.City, s.State, s.Country, TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) as Age," 
 	. "FROM_UNIXTIME(AVG(UNIX_TIMESTAMP(ts.FinishTime))) AS EndTime, tr.StartTime\n"
@@ -244,9 +231,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - 40 to 49 Female</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - 40 to 49 Female");
+ 
 //50-59
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
 	. "s.City, s.State, s.Country, TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) as Age," 
@@ -264,9 +250,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - 50 to 59 Male</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - 50 to 59 Male");
+ 
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
 	. "s.City, s.State, s.Country, TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) as Age," 
 	. "FROM_UNIXTIME(AVG(UNIX_TIMESTAMP(ts.FinishTime))) AS EndTime, tr.StartTime\n"
@@ -283,9 +268,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - 50 to 59 Female</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - 50 to 59 Female");
+ 
 
 //60-69
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
@@ -304,9 +288,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - 60 to 69 Male</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - 60 to 69 Male");
+ 
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
 	. "s.City, s.State, s.Country, TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) as Age," 
 	. "FROM_UNIXTIME(AVG(UNIX_TIMESTAMP(ts.FinishTime))) AS EndTime, tr.StartTime\n"
@@ -323,9 +306,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - 60 to 69 Female</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - 60 to 69 Female");
+ 
 
 //70 and over
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
@@ -344,9 +326,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - 70 and Over Male</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - 70 and Over Male");
+ 
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
 	. "s.City, s.State, s.Country, TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) as Age," 
 	. "FROM_UNIXTIME(AVG(UNIX_TIMESTAMP(ts.FinishTime))) AS EndTime, tr.StartTime\n"
@@ -363,9 +344,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - 70 and Over Female</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - 70 and Over Female");
+ 
 
 
 //Top Fin
@@ -383,9 +363,8 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 100";
 $result = $conn->query($sql);
-print "<div><h2>". $race . " - Fin</h2>";
-include "printResults.php";
-print "</div>";
+printResultTables($result, $race . " - Fin");
+ 
 
 $conn->close();
 ?>

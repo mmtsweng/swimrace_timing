@@ -1,5 +1,5 @@
 <?php
-function timerFormat($start_time, $end_time, $hms = false)
+function timerFormat($start_time, $end_time, $hms = true)
 {       
 	$total_time = $end_time - $start_time;
 	$hours      = floor($total_time /3600);     
