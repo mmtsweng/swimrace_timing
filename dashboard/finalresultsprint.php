@@ -1,7 +1,6 @@
 <html>
 <head>
-	<?php include 'layouthead_simple.php'; 
-	$showRaceTimes = false; ?>
+	<?php include 'layouthead_simple.php'; ?>
 	<script>
 		showSeconds = true;
 		showFinals = true;

@@ -1,6 +1,5 @@
 <?php
 include_once("dbConnections.php");
-include_once("timerhelper.php");
 include_once("printResults.php");
 
 /* Base SQL
@@ -157,7 +156,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "ORDER BY EndTime\n"
     . "Limit 500";
 $result = $conn->query($sql);
-printResultTables($result, $race . "- 19 to 29 Female");
+printResultTables($result, $race . " - 19 to 29 Female");
  
 //30-39
 $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"

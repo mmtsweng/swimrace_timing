@@ -5,7 +5,7 @@
 	<script>
 		showTruncated = false;
 		showOverall = true;
-		scroll(400);
+		scroll(500);
 	</script>
 </head>
 <body>

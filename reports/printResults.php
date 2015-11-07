@@ -2,14 +2,18 @@
 
 function printResultTables($result, $heading)
 {
-	printTableHead($heading, false);
-
+	if(!isset($showPagination))
+	{
+		$showPagination = true;
+	}
+	
 	if ($result && $result->num_rows > 0) {
+		printTableHead($heading, false);
 		
 		// output data of each row
 		$position = 1;
 		while($row = $result->fetch_assoc()) {
-			if ($position % 10 == 0)
+			if ($showPagination && ($position % 10 == 0))
 			{
 				printTableHead($heading, true);
 			}
@@ -21,12 +25,14 @@ function printResultTables($result, $heading)
 				."</td></tr>";
 			$position++;
 		}
+		print "</table></tbody></div>";
 	}
 	else
 	{
+		print "<div><h2>" . $heading . "</h2>";
 		print "<p>No Results</p>";
+		print "</div>";
 	}
-	print "</div>";
 }
 
 function printTableHead($heading, $closeTable=false)
@@ -45,17 +51,19 @@ function printTableHead($heading, $closeTable=false)
 		. "</tr></thead><tbody>";
 }
 
-/*
-function timerFormat($start_time, $end_time)
+function timerFormat($start_time, $end_time, $hms = true)
 {       
-	$interval = date_diff(new DateTime($start_time), new DateTime($end_time));
-	return $interval->format('%h:%I:%S');
-	/*
-	
 	$total_time = $end_time - $start_time;
 	$hours      = floor($total_time /3600);     
 	$minutes    = intval(($total_time/60) % 60);        
 	$seconds    = intval($total_time % 60);     
-	return sprintf("%01d:%02d:%02d",$hours,$minutes,$seconds);  
-}*/
+	if ($hms)
+	{
+		return sprintf("%01d:%02d:%02d",$hours,$minutes,$seconds);
+	}
+	else
+	{
+		return sprintf("%01d:%02d",$hours,$minutes);
+	}
+}
 ?>

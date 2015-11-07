@@ -1,6 +1,5 @@
 <?php
 include_once("dbConnections.php");
-include_once("timerhelper.php");
 include_once("printResults.php");
 
 /* Base SQL
