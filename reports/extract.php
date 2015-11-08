@@ -1,21 +1,11 @@
 
 <?php
-	const DB_SERVER="localhost";
-	const DB_USER = "root";
-	const DB_PASSWORD = "asdfasdf";
-	const DB = "Swimrace";
-	
+include_once("dbConnections.php");	
 
 
 	//require_once("/apiurl.php");	
-	$param = $_GET["type"];
-	$byRace = false;
-	$filename = "registration_alphabetical_" . date('Ymd') . ".csv";
-	if ($param == "race")
-	{
-		$filename = "registration_race_" . date('Ymd') . ".csv";
-		$byRace = true;
-	}
+	$filename = "registration_race_" . date('Ymd') . ".csv";
+	$byRace = true;
 
 	// Create connection
 	$conn = new mysqli(DB_SERVER, DB_USER, DB_PASSWORD, DB);
@@ -31,15 +21,8 @@
 		. "IF(r.HasFins=1, \"true\", \"\") as HasFins\n"
 		. "FROM Swimmers s, RaceSwimmers r, Races rc\n"
 		. "WHERE s.ID = r.SwimmerID\n"
-		. "AND r.RaceID = rc.ID\n";
-	if ($byRace)
-	{
-		$sql = $sql . "ORDER BY rc.Description, s.LastName, s.FirstName";
-	}
-	else
-	{
-		$sql =  $sql . "ORDER BY s.LastName, s.FirstName";
-	}
+		. "AND r.RaceID = rc.ID\n"
+		. "ORDER BY rc.Description, s.LastName, s.FirstName";
 	$result = $conn->query($sql);
 		
 	//Create CSV File

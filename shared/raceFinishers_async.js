@@ -69,6 +69,15 @@ function showFinishers()
 			var dtS = parseDT(item.StartTime);
 			var finishTime = $('<td>').html(DateDiff(dtS, dtF, showSeconds) + '<span class="race">(' + item.Description + ')</span>  ');
 			var swimmer = item.LastName + ', ' + item.FirstName; 
+			var fins;
+			if (item.HasFins==1)
+			{
+				fins = $('<td class="hasfins"/>').html('&nbsp;');
+			}
+			else
+			{
+				fins = $('<td/>').html('&nbsp;');
+			}
 			var tr = $('<tr/>')
 				.append(cap)			
 				.append($('<td/>').html(idx+1))
@@ -76,6 +85,7 @@ function showFinishers()
 				.append($('<td/>').html(swimmer))
 				.append($('<td/>').addClass('location').html(item.City + ', ' + item.State))
 				.append(finishTime)
+				.append (fins)
 			$('#finisherTable tbody').append(tr);
 		}
 	});

@@ -53,7 +53,7 @@ function printTableHead($heading, $closeTable=false)
 
 function timerFormat($start_time, $end_time, $hms = true)
 {       
-	$total_time = $end_time - $start_time;
+	$total_time = strtotime($end_time) - strtotime($start_time);
 	$hours      = floor($total_time /3600);     
 	$minutes    = intval(($total_time/60) % 60);        
 	$seconds    = intval($total_time % 60);     
