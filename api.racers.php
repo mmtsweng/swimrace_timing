@@ -17,7 +17,8 @@ class Racers extends APIInterface
 		$sql = "SELECT s.ID, s.FirstName, s.LastName \n".
 		"FROM Swimmers s \n".
 		"WHERE s.ID NOT IN (\n".
-		"SELECT SwimmerID FROM RaceSwimmers) LIMIT 0, 30 ";
+		"SELECT SwimmerID FROM RaceSwimmers) ".
+		"ORDER BY s.LastName LIMIT 0, 300 ";
 		$query = mysql_query($sql, $this->db);
 		if (mysql_num_rows($query) > 0)
 		{

@@ -1,5 +1,10 @@
 
-var currentRaceTable = 0;
+
+//OnReady, start the timer
+$(function()
+{
+	scroll();
+});
 
 //Function to nicely reset the view of the table to the top row
 function resetTable(tableElement, reshow)
@@ -19,30 +24,16 @@ function resetTable(tableElement, reshow)
 
 
 //Function to start scrolling the results
-function scroll(count)
+function scroll()
 {
-	resetTable($('#finisherTable1'), false);	
-	resetTable($('#finisherTable2'), false);	
-	resetTable($('#finisherTable3'), false);
-	currentRaceTable = 1;
+	resetTable($('#finisherTable'), false);	
+	callRaceFinishersAPI();
 	beginAnimate();
 }
 
 function beginAnimate()
 {
-	switch(currentRaceTable)
-	{
-		case 1:
-			$('#RaceDesc').html('5 Mile');
-			break;
-		case 2:
-			$('#RaceDesc').html('2 Mile');
-			break;
-		case 3:
-			$('#RaceDesc').html('1 Mile');
-			break;
-	}
-	$('#finisherTable' + currentRaceTable).fadeIn('slow');	
+	$('#finisherTable').fadeIn('slow');	
 	setTimeout(scrollToView, 3000);
 }
 
@@ -50,17 +41,8 @@ function beginAnimate()
 //Function called when scrolling is complete
 function notify()
 {
-	resetTable($('#finisherTable' + currentRaceTable), false);	
-	currentRaceTable++;
-	
-	if (currentRaceTable<4)
-	{
-		beginAnimate();
-	}
-	else
-	{
-		callRaceFinishersAPI();
-	}
+	resetTable($('#finisherTable'), false);	
+	callRaceFinishersAPI();
 }
 
 //Method to scroll to the end of the table
