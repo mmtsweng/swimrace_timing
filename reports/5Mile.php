@@ -360,7 +360,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.HasFins = 1\n"
 	. "GROUP BY ts.RaceSwimmerID\n"
     . "ORDER BY EndTime\n"
-    . "Limit 1";
+    . "Limit 100";
 $result = $conn->query($sql);
 printResultTables($result, $race . " - Fin");
  

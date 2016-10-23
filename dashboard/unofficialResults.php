@@ -4,9 +4,6 @@
 	$showRaceTimes = false; 
 	$showPagination = true; ?>
 	<script>
-		showSeconds = true;
-		showFinals = true;
-		showTruncated = false;
 		showTimes = false;
 		
 		$(function()
@@ -23,21 +20,19 @@
 					.end()
 					.appendTo('#slideshow');
 				}, 10000);
-			/*	
+				
 			 setInterval(function() {
                   window.location.reload();
-                }, 300000); )*/
+                }, 250000); 
 		});
 		
 	</script>
 </head>
 <body>
 	<?php include 'layoutprecontent.php' ?>
-	<H1>2015 Final Results</H1>
+	<H1>2015 Unofficial Results</H1>
 		<div id="slideshow">
-			<?php include '../reports/5Mile.php' ?>			
-			<?php include '../reports/2Mile.php' ?>			
-			<?php include '../reports/1Mile.php' ?>			
+			<?php include '../reports/Overall.php' ?>		
 		</div>
 
 	<?php include 'layoutpostcontent.php' ?>

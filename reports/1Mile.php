@@ -42,7 +42,7 @@ $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Ge
     . "AND rs.HasFins = 0\n"
     . "GROUP BY ts.RaceSwimmerID\n"
     . "ORDER BY EndTime\n"
-    . "Limit Limit 500";
+    . "Limit 500";
 $result = $conn->query($sql);
 printResultTables($result, $race . " - Overall");
 

@@ -22,9 +22,13 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=1
-FILE_NAME_0=0;PHP;0;EUTF-8;1;1;0;%2Fsrv%2Fwww%2Fswimrace_timing%2Fapi.swimmers.php;0;4
-FILE_NAME_1=500;PHP;0;EUTF-8;1;1;0;%2Fsrv%2Fwww%2Fswimrace_timing%2Fapi.racers.php;0;4
+current_page=5
+FILE_NAME_0=775;PHP;0;EUTF-8;1;1;0;%2Fsrv%2Fwww%2Fswimrace_timing%2Freports%2F5Mile.php;0;4
+FILE_NAME_1=508;PHP;0;EUTF-8;1;1;0;%2Fsrv%2Fwww%2Fswimrace_timing%2Freports%2F2Mile.php;0;4
+FILE_NAME_2=510;PHP;0;EUTF-8;1;1;0;%2Fsrv%2Fwww%2Fswimrace_timing%2Freports%2FOverall.php;0;4
+FILE_NAME_3=378;PHP;0;EUTF-8;1;1;0;%2Fsrv%2Fwww%2Fswimrace_timing%2Freports%2FprintResults.php;0;4
+FILE_NAME_4=1279;PHP;0;EUTF-8;1;1;0;%2Fsrv%2Fwww%2Fswimrace_timing%2Freports%2F1Mile.php;0;4
+FILE_NAME_5=452;PHP;0;EUTF-8;1;1;0;%2Fsrv%2Fwww%2Fswimrace_timing%2Fdashboard%2Ffinalresults.php;0;4
 
 [VTE]
 last_dir=/home/pi
