@@ -57,6 +57,20 @@ if (!empty($_POST)):
 			$('#StartTime' + raceid).val(new Date().toISOString().slice(0, 19).replace('T', ' '));
 			$('#frm' + raceid).submit();
 		}
+		
+		function clearLocal()
+		{
+			if (confirm("Are you SURE you want to lose all local data?"))
+			{
+				var localString = localStorage.getItem(LOCAL_STORAGE_KEY);
+				var jsonLocal = JSON.parse(localString);
+				jsonLocal = new Object();
+				jsonLocal.finishers = new Array();
+				localString = JSON.stringify(jsonLocal);
+				localStorage.setItem(LOCAL_STORAGE_KEY, localString);
+				alert ('Deleted.');
+			}
+		}
 	</script>
 </head>
 <body>
@@ -98,6 +112,7 @@ if (!empty($_POST)):
 	}
 	?>
 	</table>
+	<div style="margin-top:50px">Reset Local Storage: <input type='button' onclick='clearLocal()' name='clearLocal' value='Clear' /></div>
 </body>
 </html>
 	

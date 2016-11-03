@@ -1,4 +1,5 @@
 
+
 $(function()
 {
 	//Set focus
@@ -28,14 +29,38 @@ function saveSwimmerTime()
 	//Load swimmer results
 	var id = $('#RacerText').val();
 	var finishTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
-	CallSwimmerFinishAPI(id, finishTime);						
+	callSwimmerFinishAPI(id, finishTime);
+	saveLocal(id, finishTime);						
 				
 	//Clear textbox
 	$('#RacerText').val('');
 }
 
+//Save the time on the local device so it is never lost
+function saveLocal(id, finishtime)
+{
+	try
+	{
+		var localString = localStorage.getItem(LOCAL_STORAGE_KEY);
+		var jsonLocal = JSON.parse(localString);
+		if (jsonLocal == null)
+		{
+			jsonLocal = new Object();
+			jsonLocal.finishers = new Array();
+		}
+		jsonLocal['finishers'].push({'id':id, 'finishTime':finishtime});
+		localString = JSON.stringify(jsonLocal);
+		localStorage.setItem(LOCAL_STORAGE_KEY, localString);
+	}
+	catch (err)
+	{
+		alert (err.message);
+	}
+
+}
+
 //API Call
-function CallSwimmerFinishAPI(id, finishtime)
+function callSwimmerFinishAPI(id, finishtime)
 {
 		var apiData = {RacerNumber:id, FinishTime:finishtime};
 		//alert(JSON.stringify(apiData));
@@ -68,7 +93,7 @@ function CallSwimmerFinishAPI(id, finishtime)
 		})
 		.fail(function(xhr, desc, err)
 		{
-			alert(desc);
+			console.log(desc);
 		})
 		;		
 }
