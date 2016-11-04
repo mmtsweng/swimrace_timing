@@ -18,6 +18,7 @@ class Racers extends APIInterface
 		"FROM Swimmers s \n".
 		"WHERE s.ID NOT IN (\n".
 		"SELECT SwimmerID FROM RaceSwimmers) ".
+		"OR s.ID in (SELECT swimmerID from RaceSwimmers where RaceID = -1) ".
 		"ORDER BY s.LastName LIMIT 0, 300 ";
 		$query = mysql_query($sql, $this->db);
 		if (mysql_num_rows($query) > 0)
@@ -81,7 +82,7 @@ class Racers extends APIInterface
 	{
 		$sql = $sql = "SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName, s.LastName, s.Gender, s.Birthdate,"
 	. "s.City, s.State, s.Country," 
-	. "r.Description, r.Cap, r.CapHex, rs.HasFins, FROM_UNIXTIME(AVG(UNIX_TIMESTAMP(ts.FinishTime))) AS averageDate, tr.StartTime\n"
+	. "r.Description, r.Cap, r.CapHex, rs.HasFins, FROM_UNIXTIME(MAX(UNIX_TIMESTAMP(ts.FinishTime))) AS averageDate, tr.StartTime\n"
     . "FROM Races r, RaceSwimmers rs, Swimmers s, TimeSwimmer ts, TimeRace tr\n"
     . "WHERE rs.SwimmerID = s.ID \n"
     . "AND rs.RaceID = r.ID \n"
@@ -162,6 +163,9 @@ class Racers extends APIInterface
 			$race = (int)$postjson['RaceID'];
 			$racernumber = (int)$postjson['RacerNumber'];
 			$hasfins = (int)$postjson['HasFins'];
+			
+			$sql = "DELETE from RaceSwimmers WHERE SwimmerID=$swimmer";
+			$retval = mysql_query($sql, $this->db);
 			
 			$sql = "INSERT into RaceSwimmers (SwimmerID, RaceID, RacerNumber, HasFins) ".
 			"VALUES ($swimmer, $race, $racernumber, $hasfins)";

@@ -21,6 +21,11 @@ $(function()
 	{
 		saveSwimmerTime();
 	});
+	
+	$('#LocalRefresh').click(function (e)
+	{
+		uploadLocal();
+	});
 });
 
 //Save this racer number's finish time
@@ -51,12 +56,52 @@ function saveLocal(id, finishtime)
 		jsonLocal['finishers'].push({'id':id, 'finishTime':finishtime});
 		localString = JSON.stringify(jsonLocal);
 		localStorage.setItem(LOCAL_STORAGE_KEY, localString);
+		
+		//Display Local Results
+		$('ul#SwimmerLocal').empty();
+		var ctr=0;
+		$.each(jsonLocal['finishers'], function(index, item)
+			{
+				ctr = ctr + 1;
+				var li = '<li>Place: ' + ctr + ' Racer#: ' + item.id + '</li>';				
+				$('ul#SwimmerLocal').append(li);
+				
+				//Limit
+				if ($('ul#SwimmerLocal li').length > 10)
+				{
+					$('ul#SwimmerLocal li:first').remove();
+				}	
+			});
 	}
 	catch (err)
 	{
-		alert (err.message);
+		console.log(err.message);
 	}
 
+}
+
+//Upload the local storage times to the server 
+function uploadLocal()
+{
+		var localString = localStorage.getItem(LOCAL_STORAGE_KEY);
+		
+		$.ajax(
+		{
+			url: '/api.php?r=swimmertimesrefresh',
+			type: 'post',
+			contentType: 'application/json',
+			dataType: 'json',
+			data: localString
+		})
+		.done (function(data)
+		{
+			alert ('Upload Complete');
+		})
+		.fail(function(xhr, desc, err)
+		{
+			alert('Could not upload: ' + desc);
+		})
+		;
 }
 
 //API Call
@@ -84,8 +129,8 @@ function callSwimmerFinishAPI(id, finishtime)
 				var li = '<li><span style="background-color: ' + item.CapHex + '">' + item.RacerNumber + '</span> -- ' + item.lastname + ", " + item.firstname + "   " + DateDiff(dtS, dtF, true) + '</li>';				
 				$('ul#SwimmerList').append(li);
 				
-				//Limit to 5
-				if ($('ul#SwimmerList li').length > 5)
+				//Limit number shown
+				if ($('ul#SwimmerList li').length > 10)
 				{
 					$('ul#SwimmerList li:first').remove();
 				}	

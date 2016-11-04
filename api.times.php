@@ -120,6 +120,41 @@ class Times extends APIInterface
 			$this->response('{"ID":-1}',400);
 		}		
 	}	
+	public function swimmertimesrefresh()
+	{
+		try
+		{
+			//Expected format: {"finishers":[{"id":1, "FinishTime":"09-12-2014 12:15:20"},...]}
+			$postjson = file_get_contents("php://input");
+			$json = json_decode($postjson, true);
+			$finishers = $json['finishers'];
+
+			foreach($json['finishers'] as $finisher)
+			{
+				$racernum = (int)$finisher['id'];
+				$status = 1;
+				$result = array();
+				$finishtime = new DateTime($finisher['finishTime']);
+				$mysqldate = $finishtime->format("Y-m-d H:i:s");
+				
+				$sql = "SELECT ID From RaceSwimmers WHERE RacerNumber = $racernum limit 1";
+				$idResult = mysql_query($sql, $this->db);
+				$swimmerid = mysql_fetch_row($idResult);
+				
+				$sql = "INSERT INTO TimeSwimmer (RaceSwimmerID, FinishTime, Status) ".
+					"VALUES ($swimmerid[0], '$mysqldate', $status)";			
+				$retval = mysql_query($sql, $this->db);
+				$sqlid = mysql_insert_id();	
+			}
+			
+			$this->response('{"ID":1}', 200);
+		}
+		catch (Exception $e)
+		{
+			$this->response('{"ID":-1}',400);
+		}		
+	}	
+	
 	
 }
 
