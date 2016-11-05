@@ -1,6 +1,7 @@
 <html>
 <head>
 	<?php include 'layouthead.php' ?>
+	<script type="text/javascript" src="assets/animatescroll.min.js"></script>
 	<script type="text/javascript" src="/dashboard/assets/scrollTable.js"></script>
 	<script>
 		showTruncated = false;

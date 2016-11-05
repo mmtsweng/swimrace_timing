@@ -33,7 +33,7 @@
 </head>
 <body>
 	<?php include 'layoutprecontent.php' ?>
-	<H1>2015 Final Results</H1>
+	<H1>2016 Final Results</H1>
 		<div id="slideshow">
 			<?php include '../reports/5Mile.php' ?>			
 			<?php include '../reports/2Mile.php' ?>			

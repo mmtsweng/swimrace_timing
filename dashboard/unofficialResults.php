@@ -1,7 +1,7 @@
 <html>
 <head>
 	<?php include 'layouthead.php'; 
-	$showRaceTimes = false; 
+	$showRaceTimes = true; 
 	$showPagination = true; ?>
 	<script>
 		showTimes = false;
@@ -23,14 +23,14 @@
 				
 			 setInterval(function() {
                   window.location.reload();
-                }, 250000); 
+                }, 200000); 
 		});
 		
 	</script>
 </head>
 <body>
 	<?php include 'layoutprecontent.php' ?>
-	<H1>2015 Unofficial Results</H1>
+	<H1>2016 Unofficial Results</H1>
 		<div id="slideshow">
 			<?php include '../reports/Overall.php' ?>		
 		</div>

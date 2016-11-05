@@ -212,7 +212,7 @@ class Racers extends APIInterface
 			$sql = "UPDATE Swimmers SET " .
 			"Gender='$gender', ".
 			"Birthdate='$birthdate', " .
-			"City='$city',s " .
+			"City='$city', " .
 			"State='$state' " .
 			"WHERE ID=$swimmer";
 			$retval = mysql_query($sql, $this->db);

@@ -28,7 +28,7 @@
 		'Gender'		=> $_POST['Gender'],
 		'Birthdate'		=> $_POST['Birthdate'],
 		'City'			=> $_POST['City'],
-		'Country'		=> $_POST['State'],
+		'State'		=> $_POST['State'],
 		'HasFins'		=> $_POST['HasFins'],
 	);
 	$json = json_encode($data);
@@ -84,7 +84,7 @@
 		print "<td><input type='text' name='Gender' id='Gender' value='" . $item['Gender'] . "' /></td>";
 		print "<td><input size='11' type='text' name='Birthdate' id='birthdate' value='" . $item['Birthdate'] . "' /></td>";
 		print "<td><input type='text' name='City' id='racenumber' value='" . $item['City'] . "' /></td>";
-		print "<td><input size='3' type='text' name='Country' id='racenumber' value='" . $item['State'] . "' /></td>";
+		print "<td><input size='3' type='text' name='State' id='racenumber' value='" . $item['State'] . "' /></td>";
 		print "<td>";
 
 		print "<input type='hidden' name='HasFins' value='0'>Fins:<input type='checkbox' name='HasFins' value='1' id='checkbox' ";
