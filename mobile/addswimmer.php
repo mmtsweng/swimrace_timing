@@ -3,16 +3,14 @@
 	
 
    if (!empty($_POST)):
-    
-    //{"ID":"5","RacerNumber":123, "SwimmerID":1, "RaceID":1, "HasFins":0}
-    
+        
     $data = array(
 		'FirstName'		=> $_POST['FirstName'],
 		'LastName'		=> $_POST['LastName'],
 		'Gender'		=> $_POST['Gender'],
 		'Birthdate'		=> $_POST['Birthdate'],
 		'City'			=> $_POST['City'],
-		'Country'		=> $_POST['State'],
+		'Country'		=> $_POST['Country']
 	);
 	$json = json_encode($data);
 	
@@ -48,10 +46,10 @@
 		print "<tr>";
 		print "<td><input type='text' name='FirstName' id='FirstName' value='FirstName' /></td>";
 		print "<td><input type='text' name='LastName' id='LastName' value='LastName' /></td>";
-		print "<td><input type='text' name='Gender' id='Gender' value='MF' /></td>";
-		print "<td><input size='11' type='text' name='Birthdate' id='birthdate' value='DOB' /></td>";
-		print "<td><input type='text' name='City' id='racenumber' value='City' /></td>";
-		print "<td><input size='3' type='text' name='Country' id='racenumber' value='State' /></td>";
+		print "<td><input type='text' size='4' name='Gender' id='Gender' value='MF' /></td>";
+		print "<td><input size='10' type='text' name='Birthdate' id='birthdate' value='DOB' /></td>";
+		print "<td><input size='10'type='text' name='City' id='racenumber' value='City' /></td>";
+		print "<td><input size='10' type='text' name='Country' id='racenumber' value='Country/State' /></td>";
 		print "<td>";
 		print "<input type='submit' name='button' value='Add' id='submit' />";
 		print "</td>";

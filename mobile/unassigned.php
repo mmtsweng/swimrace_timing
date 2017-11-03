@@ -67,15 +67,11 @@
 		print "<td>";
 		print $item['LastName'] . ", " . $item['FirstName'];
 		print "</td>";
-		print "<td>";
-		print $item['Description'];
-		print "</td>";
 		print "<td><select name='races'><option value='-1'>&nbsp;</option>";
 		foreach($races as $race)
 		{
 			print "<option value='".$race['ID']."'>".$race['Description']."</option>";
 		}
-		print $item['Description'];
 		print "</select></td>";
 		print "<td>";
 		print "#:<input type='text' name='Number' id='racenumber' />";

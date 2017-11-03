@@ -32,7 +32,7 @@ function callRaceTimesAPI()
 	})
 	.fail(function(xhr, desc, err)
 	{
-		alert(desc);
+		console.log(desc);
 	})
 	;		
 }

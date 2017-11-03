@@ -13,17 +13,16 @@ class Swimmers extends APIInterface
 	//API Method to GET Swimmers
 	public function swimmers()
 	{
-		$sql = mysql_query("SELECT ID, FirstName, LastName, Gender, Birthdate FROM Swimmers", $this->db);
-		if (mysql_num_rows($sql) > 0)
+		try
 		{
-			$result = array();
-			while ($rlt = mysql_fetch_array($sql, MYSQL_ASSOC))
-			{
-				$result[] = $rlt;
-			}
+			$result = $this->get_sproc("GET_SWIMMERS");
 			$this->response($this->json($result), 200);
 		}
-		$this->response('',204);
+		catch (Exception $e)
+		{
+			error_log($e);
+			$this->response('{"ID":"-1"}',400);
+		}	
 	}
 	
 	//API Method to add a swimmer
@@ -38,16 +37,10 @@ class Swimmers extends APIInterface
 			$gender = $postjson['Gender'];
 			$birthdate = $postjson['Birthdate'];
 			$city = $postjson['City'];
-			$state = $postjson['State'];
+			$country = $postjson['Country'];
 			
-			$sql = "INSERT into Swimmers (FirstName, LastName, Gender, Birthdate, City, State) ".
-			"VALUES ('$firstname', '$lastname', '$gender', '$birthdate', '$city', '$state')";
-			
-			$retval = mysql_query($sql, $this->db);
-			$sqlid = mysql_insert_id();	
-			$resp = array('ID' => $sqlid);
-		
-			$this->response(json_encode($resp), 200);
+			$result = $this->call_sproc("INSERT_SWIMMER('$firstname', '$lastname', '$city', '$country', '$birthdate', '$gender')");
+			$this->response($this->json($result), 200);
 		}
 		catch (Exception $e)
 		{
@@ -55,35 +48,38 @@ class Swimmers extends APIInterface
 		}		
 	}
 	
+	public function getswimmer()
+	{
+		//Expected format: {"ID":"5"}
+		$postjson = json_decode(file_get_contents("php://input"),true);
+		$id = (int)$postjson['ID'];
+		$result = $this->get_sproc("GET_SWIMMER($id)");
+		$this->response($this->json($result), 200);
+		
+	}
+	
 	//API Method to update a swimmer
 	public function editswimmer()
 	{
 		try
 		{
-			//Expected format: {"ID":"5","FirstName":"Taylor","LastName":"Brown","Gender":"F","Birthdate":"2005-09-14"}
+			//Expected format: {"FirstName":"Taylor","LastName":"Brown","Gender":"F","Birthdate":"2005-09-14"}
 			$postjson = json_decode(file_get_contents("php://input"),true);
-			$id = (int)$postjson['ID'];
+			$id = $postjson['ID'];
 			$firstname = $postjson['FirstName'];
 			$lastname = $postjson['LastName'];
 			$gender = $postjson['Gender'];
 			$birthdate = $postjson['Birthdate'];
+			$city = $postjson['City'];
+			$country = $postjson['Country'];
 			
-			$sql = "UPDATE Swimmers ".
-			"SET FirstName='$firstname', ".
-			"LastName='$lastname', ".
-			"Gender='$gender', ".
-			"Birthdate='$birthdate' ".
-			"WHERE ID=$id";
-			
-			$retval = mysql_query($sql, $this->db);
-			$resp = array('ID' => $id);
-		
-			$this->response(json_encode($resp), 200);
+			$result = $this->call_sproc("UPDATE_SWIMMER($id,'$city', '$country', '$birthdate', '$firstname', '$lastname', '$gender')");
+			$this->response($this->json($result), 200);
 		}
 		catch (Exception $e)
 		{
 			$this->response('{"ID":"-1"}',400);
-		}		
+		}
 	}
 }
 ?>

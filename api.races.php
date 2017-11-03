@@ -15,22 +15,12 @@ class Races extends APIInterface
 	{
 		try
 		{
-			$sql = "SELECT r.ID, r.Description, r.CapHex, r.Cap ".
-				"FROM Races r ";
-			$query = mysql_query($sql, $this->db);
-			if (mysql_num_rows($query) > 0)
-			{
-				$result = array();
-				while ($rlt = mysql_fetch_array($query, MYSQL_ASSOC))
-				{
-					$result[] = $rlt;
-				}
-				$this->response($this->json($result), 200);
-			}
-			$this->response('',204);				
+			$result = $this->get_sproc("GET_RACES");
+			$this->response($this->json($result), 200);
 		}
 		catch (Exception $e)
 		{
+			error_log($e);
 			$this->response('{"ID":"-1"}',400);
 		}	
 	}		

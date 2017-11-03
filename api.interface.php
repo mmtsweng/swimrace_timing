@@ -4,38 +4,57 @@
 class APIInterface extends REST
 {
 	public $data = "";
-	const DB_SERVER="localhost";
-	const DB_USER = "root";
-	const DB_PASSWORD = "swimvast";
-	const DB = "Swimrace";
-	
-	public $db = NULL;
-	
 	
 	//Constructor
 	public function __construct()
 	{
 		parent::__construct();
-		$this->dbConnect();
 	}
 	
 	//Connect to Database
 	private function dbConnect()
 	{
-		$this->db = mysql_connect(self::DB_SERVER, self::DB_USER, self::DB_PASSWORD);
-		if ($this->db)
-		{
-			mysql_select_db(self::DB, $this->db);
+		$mysqli  = mysqli_connect("localhost", "swimrace", "stcroix", "Swimrace");
+		if ($mysqli->connect_errno){
+			error_log($mysqli->connect_error);
 		}
+		return $mysqli;
 	}
 	
-	//Encode an Array into JSON
-	public function json($data)
+	private function dbDisconnect($mysqli)
 	{
-		if (is_array($data))
+		mysqli_close($mysqli);
+	}
+	
+	
+	// Method to get a JSON response to a stored procedure
+	public function get_sproc($sprocname)
+	{
+		error_log("Calling :" . $sprocname);
+		$mysqli = $this->dbConnect();
+		$result = mysqli_query($mysqli,"CALL " . $sprocname) 
+			or die("Query Fail: " . mysqli_error());
+			
+		$data = array();
+		while ($row = mysqli_fetch_array($result))
 		{
-			return json_encode($data);
+			$data[] = $row;
 		}
-	}			
+		
+		$this->dbDisconnect($mysqli);
+		
+		return $data;
+	}
+	
+	public function call_sproc($sprocname)
+	{
+		error_log("Calling :" . $sprocname);
+		$mysqli = $this->dbConnect();
+		$result = mysqli_query($mysqli,"CALL " . $sprocname) 
+			or die("Query Fail: " . mysqli_error());
+		
+		$this->dbDisconnect($mysqli);
+		return $result;		
+	}	
 }
 ?>

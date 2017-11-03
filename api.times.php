@@ -11,25 +11,13 @@ class Times extends APIInterface
 		parent::__construct();
 	}
 	
+	//Function to get Race Times
 	public function racetimes()
 	{
 		try
 		{
-			$sql = "SELECT r.ID, r.Description, r.CapHex, t.StartTime ".
-				"FROM Races r ".
-				"LEFT JOIN TimeRace t ON r.ID = t.RaceID ".
-				"AND t.Status = 1";
-			$query = mysql_query($sql, $this->db);
-			if (mysql_num_rows($query) > 0)
-			{
-				$result = array();
-				while ($rlt = mysql_fetch_array($query, MYSQL_ASSOC))
-				{
-					$result[] = $rlt;
-				}
-				$this->response($this->json($result), 200);
-			}
-			$this->response('',204);				
+			$result = $this->get_sproc("GET_RACETIMES");
+			$this->response($this->json($result), 200);
 		}
 		catch (Exception $e)
 		{
@@ -45,19 +33,13 @@ class Times extends APIInterface
 			$postjson = json_decode(file_get_contents("php://input"),true);
 			$race = (int)$postjson['RaceID'];
 			$status = 1;
-			//$starttime = new DateTime($postjson['StartTime']);
 			$starttime = new DateTime();
-			//$starttime->setTimezone(new DateTimeZone('America/St_Thomas'));
 			$mysqldate = $starttime->format("Y-m-d H:i:s");
 			
-			$updatesql = "UPDATE TimeRace SET Status = 0 WHERE RaceID = $race";
-			mysql_query($updatesql, $this->db);
-			
-			$sql = "INSERT INTO TimeRace (RaceID, StartTime, Status) ".
-			"VALUES ($race, '$mysqldate', $status)";
-			
-			$retval = mysql_query($sql, $this->db);
-			$sqlid = mysql_insert_id();	
+			$result = $this->call_sproc("SP_RESETTIMERACE($race)");
+			$result = $this->call_sproc("INSERT_TIMERACE($race, '$mysqldate', $status)");
+			$this->response($this->json($result), 200);
+
 			$resp = array('ID' => $sqlid);
 		
 			$this->response(json_encode($resp), 200);
