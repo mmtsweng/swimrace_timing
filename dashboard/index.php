@@ -1,7 +1,7 @@
 <html>
 <head>
 	<?php include 'layouthead.php' ?>
-	<script type="text/javascript" src="/dashboard/assets/scrollTable.js"></script>
+	<script type="text/javascript" src="/shared/raceFinishers_async.js"></script>
 	<script>
 		showTruncated = false;
 		showOverall = true;
@@ -31,6 +31,8 @@
 	<?php include 'layoutpostcontent.php' ?>
 </body>
 </html>
+
+
 	
 
 

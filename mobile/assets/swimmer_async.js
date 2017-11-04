@@ -27,7 +27,7 @@ function saveSwimmerTime()
 {
 	//Load swimmer results
 	var id = $('#RacerText').val();
-	var finishTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
+	var finishTime = JSONLocalTime();
 	CallSwimmerFinishAPI(id, finishTime);						
 				
 	//Clear textbox
@@ -59,8 +59,8 @@ function CallSwimmerFinishAPI(id, finishtime)
 				var li = '<li><span style="background-color: ' + item.CapHex + '">' + item.RacerNumber + '</span> -- ' + item.lastname + ", " + item.firstname + "   " + DateDiff(dtS, dtF, true) + '</li>';				
 				$('ul#SwimmerList').append(li);
 				
-				//Limit to 5
-				if ($('ul#SwimmerList li').length > 5)
+				//Limit to 20
+				if ($('ul#SwimmerList li').length > 20)
 				{
 					$('ul#SwimmerList li:first').remove();
 				}	

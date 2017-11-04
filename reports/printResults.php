@@ -1,38 +1,30 @@
 <?php
 
+
 function printResultTables($result, $heading)
 {
-	if(!isset($showPagination))
-	{
-		$showPagination = true;
-	}
-	
-	if ($result && $result->num_rows > 0) {
+	if ($result && count($result) > 0) {
+		$position = 1;
 		printTableHead($heading, false);
 		
-		// output data of each row
-		$position = 1;
-		while($row = $result->fetch_assoc()) {
-			if ($showPagination && ($position % 10 == 0))
-			{
-				printTableHead($heading, true);
-			}
+		foreach($result as $row)
+		{
 			print "<tr><td>".$position."</td><td>"
 				.timerFormat($row["StartTime"],$row["EndTime"])."</td><td>"
 				.$row["LastName"].", ".$row["FirstName"]."</td><td>"
-				.$row["Age"]."</td><td>"
-				.$row["City"]. ",".$row["State"]." ".$row["Country"]
+				.$row["City"]. "," .$row["Country"]
 				."</td></tr>";
 			$position++;
 		}
 		print "</table></tbody></div>";
-	}
-	else
-	{
+
+	}else{
 		print "<div><h2>" . $heading . "</h2>";
 		print "<p>No Results</p>";
 		print "</div>";
 	}
+
+	
 }
 
 function printTableHead($heading, $closeTable=false)
@@ -46,24 +38,31 @@ function printTableHead($heading, $closeTable=false)
 		. "<tr><td>Position</td>"
 		. "<td>Time</td>"
 		. "<td>Name</td>"
-		. "<td>Age</td>"
 		. "<td>Location</td>"
 		. "</tr></thead><tbody>";
 }
 
 function timerFormat($start_time, $end_time, $hms = true)
-{       
-	$total_time = strtotime($end_time) - strtotime($start_time);
-	$hours      = floor($total_time /3600);     
-	$minutes    = intval(($total_time/60) % 60);        
-	$seconds    = intval($total_time % 60);     
-	if ($hms)
-	{
-		return sprintf("%01d:%02d:%02d",$hours,$minutes,$seconds);
-	}
-	else
-	{
-		return sprintf("%01d:%02d",$hours,$minutes);
-	}
+{       	
+	$dateStart = new DateTime($start_time);
+	$dateEnd = new DateTime($end_time);
+	$dateDiff = $dateEnd->diff($dateStart);
+	return $dateDiff->format("%H:%I:%S");
 }
+
+function callAPI($api, $data){
+	$json = json_encode($data);
+	    
+    //Post Changes
+    $ch = curl_init($api);                                                                      
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $json);                                                                  
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
+		'Content-Type: application/json',                                                                                
+		'Content-Length: ' . strlen($json))                                                                       
+	);                                                                                                                   
+ 	return json_decode(curl_exec($ch), true);;
+}
+
 ?>

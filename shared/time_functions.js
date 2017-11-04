@@ -15,28 +15,21 @@ function parseDT(dt)
 	return result;   
 }
 
-
+function JSONLocalTime () 
+{
+	var d = new Date();
+	console.log(d);
+	return d.getFullYear()  
+	+ "-" + ("0"+(d.getMonth()+1)).slice(-2) 
+	+ "-" + ("0" + d.getDate()).slice(-2)
+	+ " " + ("0" + d.getHours()).slice(-2) 
+	+ ":" + ("0" + d.getMinutes()).slice(-2)
+	+ ":" + ("0" + d.getSeconds()).slice(-2);
+}
 
 //DateDiff
 function DateDiff(starttime, endtime, showSeconds)
 {
-/*	
-	var matchDate = /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/;
-	var firstDateParsed = matchDate.exec(starttime);
-	var secondDateParsed = matchDate.exec(endtime);
-	var a = new Date(firstDateParsed[1], firstDateParsed[2], firstDateParsed[3], firstDateParsed[4], firstDateParsed[5], firstDateParsed[6], 0);
-	var b = new Date(secondDateParsed[1], secondDateParsed[2], secondDateParsed[3], secondDateParsed[4], secondDateParsed[5], secondDateParsed[6], 0);
-	var differenceInMilliseconds = a.getTime() - b.getTime();
-
-	// minutes
-	var minutes = (differenceInMilliseconds / 1000 / 60);
-
-	// hours
-	var hours = (differenceInMilliseconds / 1000 / 60 / 60);
-
-	// days
-	var days = (differenceInMilliseconds / 1000 / 60 / 60 / 24);
-*/
 	var timeDiff = Math.abs(endtime - starttime) / 1000;
 	var days = Math.floor(timeDiff / 86400);
 	timeDiff -= days * 86400;
@@ -45,18 +38,6 @@ function DateDiff(starttime, endtime, showSeconds)
 	var minutes = Math.floor(timeDiff / 60) % 60;
 	timeDiff -= minutes * 60;
 	var seconds = Math.floor(timeDiff % 60);
-
-/*
-
-	// Calculate H:MM:SS
-	var seconds = Math.round(timeDiff % 60);
-	timeDiff = Math.floor(timeDiff / 60);
-	var minutes = Math.round(timeDiff % 60);
-	timeDiff = Math.floor(timeDiff / 60);
-	var hours = Math.round(timeDiff % 24);
-	timeDiff = Math.floor(timeDiff / 24);
-	var days = timeDiff ;
-*/
 	
 	if (showSeconds)
 	{
@@ -65,8 +46,7 @@ function DateDiff(starttime, endtime, showSeconds)
 	else
 	{
 		return hours + " : " + padLeft(minutes);
-	}
-	
+	}	
 }
 
 

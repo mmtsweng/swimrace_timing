@@ -28,6 +28,7 @@
 		//OnReady, initiate the gauges
 		$(function()
 		{
+			$('#gauge3').circliful();		
 			$('#gauge0').circliful();		
 			$('#gauge1').circliful();		
 			$('#gauge2').circliful();		

@@ -24,7 +24,7 @@ function callRaceFinishersAPI()
 	})
 	.done (function(data)
 	{
-		console.log(JSON.stringify(data));
+		//console.log(JSON.stringify(data));
 		/*
 		 * [
 		 * {"ID":"1","RacerNumber":"1","SwimmerID":"10","FirstName":"Alex","LastName":"Kostich",

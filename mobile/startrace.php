@@ -41,7 +41,7 @@ if (!empty($_POST)):
 	}
 	catch (Exception $e)
 	{
-		
+		error_log($e);
 	}
 ?>
 
@@ -54,7 +54,7 @@ if (!empty($_POST)):
 		//OnReady, start the timer
 		function startRace(raceid)
 		{
-			$('#StartTime' + raceid).val(new Date().toISOString().slice(0, 19).replace('T', ' '));
+			$('#StartTime' + raceid).val(JSONLocalTime());
 			$('#frm' + raceid).submit();
 		}
 	</script>

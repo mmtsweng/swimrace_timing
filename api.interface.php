@@ -36,7 +36,7 @@ class APIInterface extends REST
 			or die("Query Fail: " . mysqli_error());
 			
 		$data = array();
-		while ($row = mysqli_fetch_array($result))
+		while ($row = mysqli_fetch_assoc($result))
 		{
 			$data[] = $row;
 		}

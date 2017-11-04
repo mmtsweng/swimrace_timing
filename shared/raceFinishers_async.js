@@ -39,13 +39,13 @@ function callRaceFinishersAPI()
 		{
 			$('#scrollableTable').show();
 			showFinishers();
-			setTimeout(callRaceFinishersAPI, 15000);
+			//setTimeout(callRaceFinishersAPI, 15000);
 		}
 		else
 		{
 			$('#scrollableTable').hide();
 			console.log("No Data");
-			setTimeout(callRaceFinishersAPI, 5000);
+			//setTimeout(callRaceFinishersAPI, 5000);
 		}
 	})
 	.fail(function(xhr, desc, err)
@@ -83,7 +83,7 @@ function showFinishers()
 				.append($('<td/>').html(idx+1))
 				.append($('<td/>').html(item.RacerNumber))
 				.append($('<td/>').html(swimmer))
-				.append($('<td/>').addClass('location').html(item.City + ', ' + item.State))
+				.append($('<td/>').addClass('location').html(item.City + ', ' + item.Country))
 				.append(finishTime)
 				.append (fins)
 			$('#finisherTable tbody').append(tr);
