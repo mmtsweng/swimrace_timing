@@ -28,19 +28,24 @@ function scroll()
 {
 	resetTable($('#finisherTable'), false);	
 	callRaceFinishersAPI();
-	beginAnimate();
 }
 
 function beginAnimate()
 {
+	console.log('begin animate');
 	$('#finisherTable').fadeIn('slow');	
-	setTimeout(scrollToView, 3000);
+	var rows = $('#finisherTable > tbody > tr').length;
+	console.log('rows: ' + rows);
+	setTimeout(scroll, rows * 500);
 }
 
 
 //Function called when scrolling is complete
 function notify()
 {
+	console.log('notify');
+	scroll();
+	return;
 	resetTable($('#finisherTable'), false);	
 	callRaceFinishersAPI();
 }

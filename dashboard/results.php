@@ -1,6 +1,6 @@
 <?php
 	require_once("apiurl.php");	
-	require_once("timerhelper.php");
+	//require_once("timerhelper.php");
 	
 	$response = file_get_contents($api . 'racefinishers');
 	$raceresponse = file_get_contents($api . 'races');
@@ -52,7 +52,7 @@
 				print $item['RacerNumber'];
 				print "</td>";
 				print "<td>";
-				print timerFormat(strtotime($item['StartTime']), strtotime($item['averageDate']));
+				//print timerFormat(strtotime($item['StartTime']), strtotime($item['averageDate']));
 				print "</td>";
 				print "<td>";
 				print $item['LastName'] . ", " . $item['FirstName'];

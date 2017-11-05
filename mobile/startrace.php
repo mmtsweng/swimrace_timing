@@ -57,6 +57,16 @@ if (!empty($_POST)):
 			$('#StartTime' + raceid).val(JSONLocalTime());
 			$('#frm' + raceid).submit();
 		}
+
+		//OnReady, start the timer
+		function startManualRace()
+		{
+			var raceid = $('#ManualRaceID').val(); 
+			$('ID').val(raceid);
+			$('#StartTime' + raceid).val($('#ManualStartTime').val());
+			$('#frm' + raceid).submit();
+		}
+
 	</script>
 </head>
 <body>
@@ -98,6 +108,22 @@ if (!empty($_POST)):
 	}
 	?>
 	</table>
+	
+	<hr style="margin-top: 30px; margin-bottom: 30px"/>
+	
+	<?php 
+	print "<form id='frm4' action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "' method='post'>";
+
+	?>
+	<h3>Manual Start</h3>
+	<table>
+		<tr>
+			<td><input type='text' id='ManualRaceID' size='4' value='id'></td>
+			<td><input type='text' id='ManualStartTime'size='20' value='2017-11-04 07:00:00'></td>
+			<td><input type='button' value='Set Time' id='manualsubmit' onclick='startManualRace();' ></td>
+		</tr>
+	</table>
+	</form>
 </body>
 </html>
 	

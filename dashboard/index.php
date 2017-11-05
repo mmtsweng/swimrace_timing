@@ -1,11 +1,8 @@
 <html>
 <head>
 	<?php include 'layouthead.php' ?>
-	<script type="text/javascript" src="/shared/raceFinishers_async.js"></script>
-	<script>
-		showTruncated = false;
-		showOverall = true;
-	</script>
+	<script type="text/javascript" src="assets/scrollTable.js"></script>
+	<script type="text/javascript" src="assets/animatescroll.min.js"></script>
 </head>
 <body>
 	<?php include 'layoutprecontent.php' ?>

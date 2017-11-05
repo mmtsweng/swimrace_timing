@@ -1,4 +1,4 @@
-
+ 
 *{
 padding : 0;
 margin : 0;
@@ -42,19 +42,26 @@ text-align: center;
 .pageContent
 {
 float: left;
-margin-top: 90px;
-margin-left: 20%;
+margin-top: 200px;
+margin-left: 200px;
 display: block;
-width:80%;
-/* border: blue 1px solid; */
+width:60%;
+/*border: blue 1px solid;*/
 
 }
 .pageContent h1, .pageContent h2, .pageContent h3{
 text-align: center;
+margin-top: 80px;
 }
 
 
 /* Results Table */
+.finisherTable
+{
+    left: 50%;
+    margin-left: -50px;
+    width: 800px;
+ }
 .finisherTable td
 {
 padding-left: 10px;
@@ -130,4 +137,5 @@ height: 60%;
 	left: 1px;
 	right: 1px;
 	bottom: 1px;
+	width: 70%;
 }

@@ -39,6 +39,14 @@ function callRaceFinishersAPI()
 		{
 			$('#scrollableTable').show();
 			showFinishers();
+			try
+			{
+				beginAnimate();
+			}
+			catch(e)
+			{
+				console.log ('Error getting finishers');
+			}
 			//setTimeout(callRaceFinishersAPI, 15000);
 		}
 		else

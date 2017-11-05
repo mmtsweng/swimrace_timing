@@ -17,12 +17,13 @@
 			
 			setInterval(function() {
 				$('#slideshow > div:first')
-					.fadeOut(2000)
+					.fadeOut(500)
 					.next()
-					.fadeIn(2000)
+					.fadeIn(500)
 					.end()
 					.appendTo('#slideshow');
-				}, 10000);
+				}, 3500);
+				
 			/*	
 			 setInterval(function() {
                   window.location.reload();
@@ -33,7 +34,7 @@
 </head>
 <body>
 	<?php include 'layoutprecontent.php' ?>
-	<H1>2015 Final Results</H1>
+	<H1>2017 Final Results</H1>
 		<div id="slideshow">
 			<?php include '../reports/5Mile.php' ?>			
 			<?php include '../reports/2Mile.php' ?>			

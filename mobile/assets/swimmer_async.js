@@ -25,13 +25,67 @@ $(function()
 //Save this racer number's finish time
 function saveSwimmerTime()
 {
+	//Check for Storage
+	if (localStorage['finishers'] == null)
+	{
+		localStorage['finishers'] = JSON.stringify([]);
+	}
+	
 	//Load swimmer results
 	var id = $('#RacerText').val();
 	var finishTime = JSONLocalTime();
-	CallSwimmerFinishAPI(id, finishTime);						
+	StoreLocally(id, finishTime);						
+	CallSwimmerFinishAPI(id, finishTime);	
+	PrintLocal();					
 				
 	//Clear textbox
 	$('#RacerText').val('');
+}
+
+//Method to store all finishers in local storage
+function StoreLocally(id, finishtime)
+{
+	var finisherData = {RacerNumber:id, FinishTime:finishtime};
+	var storedNames = JSON.parse(localStorage["finishers"]);
+	storedNames.push(finisherData);
+	localStorage["finishers"] = JSON.stringify(storedNames);
+}
+
+//Method to Print the Local Storage Items to the Screen
+function PrintLocal()
+{
+	var storedFinisher = JSON.parse(localStorage["finishers"]);
+	$('#SwimmerLocalStorage').empty();
+	$.each(storedFinisher, function(i, item){
+			$('#SwimmerLocalStorage').prepend(item.RacerNumber + " , " + item.FinishTime + "<br />");
+	});
+}
+
+//Method to upload all the local storage items to the server
+function BulkUpload()
+{
+	var storedFinisher = JSON.parse(localStorage["finishers"]);
+	$('#SwimmerLocalStorage').empty();
+	$.each(storedFinisher, function(i, item){
+		var apiData = {RacerNumber:item.RacerNumber, FinishTime:item.FinishTime};
+		
+		$.ajax(
+		{
+			url: '/api.php?r=swimmerfinish',
+			type: 'post',
+			contentType: 'application/json',
+			dataType: 'json',
+			data: JSON.stringify(apiData)
+		})
+		.done (function(data)
+		{
+			$('#SwimmerLocalStorage').prepend(item.RacerNumber + " , " + item.FinishTime + "<br />"); 
+		})
+		.fail(function(xhr, desc, err)
+		{
+			console.log(desc);
+		});		
+	});
 }
 
 //API Call
@@ -50,25 +104,10 @@ function CallSwimmerFinishAPI(id, finishtime)
 		})
 		.done (function(data)
 		{
-			$.each(data, function(index, item)
-			{
-				//alert (JSON.stringify(data));
-				//[{"ID":"2","TimeID":"14","RacerNumber":"123","firstname":"Matt","lastname":"Brown","Description":"5 Mile","CapHex":"#FFFF00"}]
-				var dtF = parseDT(item.FinishTime);
-				var dtS = parseDT(item.StartTime);
-				var li = '<li><span style="background-color: ' + item.CapHex + '">' + item.RacerNumber + '</span> -- ' + item.lastname + ", " + item.firstname + "   " + DateDiff(dtS, dtF, true) + '</li>';				
-				$('ul#SwimmerList').append(li);
-				
-				//Limit to 20
-				if ($('ul#SwimmerList li').length > 20)
-				{
-					$('ul#SwimmerList li:first').remove();
-				}	
-			});
+			console.log('Saved ID:' + id + 'Time:' + finishTime); 
 		})
 		.fail(function(xhr, desc, err)
 		{
-			alert(desc);
-		})
-		;		
+			console.log(desc);
+		});		
 }

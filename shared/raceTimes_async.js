@@ -6,7 +6,7 @@ var secondTimer;
 $(function()
 {
 	callRaceTimesAPI();
-	setInterval(callRaceTimesAPI, 30000);
+	setInterval(callRaceTimesAPI, 60000);
 });
 
 //Function to AJAX the race times from the API

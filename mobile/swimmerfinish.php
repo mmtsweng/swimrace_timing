@@ -22,17 +22,25 @@
 <body>
 	<?php include 'layoutnav.php' ?>
 	<H1>Swimmer Finish</H1>
-	
-	<ul id='SwimmerList' class='SwimmerFinish'>
-	</ul>
-	
 	<table>
-	<tr>
-		<td>Racer Number</td>
-		<td><input type='number' name='RacerText' id='RacerText' value='' /></td>
-		<td><input type='button' id='RacerGo' value='Save' /?</td>
-	</tr>	
-	</table>
+		<tr><td>
+				<table>
+				<tr>
+					<td>Racer Number</td>
+					<td><input type='number' name='RacerText' id='RacerText' value='' /></td>
+					<td><input type='button' id='RacerGo' value='Save' /?</td>
+				</tr>	
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<h4>Local Storage</h4>
+				<div id='SwimmerLocalStorage'></div>
+			</td>
+		</tr>
+	</table>	
+	
 
 </body>
 </html>

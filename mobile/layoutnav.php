@@ -5,6 +5,7 @@
 		<li><a href="racers.php">Racer Lists</a></li>
 		<li><a href="finishers.php">Finishers</a></li>
 		<li><a href="finishcounts.php">Race Counts</a></li>
+		<li><a href="showlocal.php">Local Times</a></li>
 		<li><a href="startrace.php">Start Race</a></li>
 		<li><a href="swimmerfinish.php">Finish Line</a></li>
 	</ul>

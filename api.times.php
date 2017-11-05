@@ -25,6 +25,20 @@ class Times extends APIInterface
 		}	
 	}	
 	
+	//Function to get Overall Order of Finish
+	public function finishOrder()
+	{
+		try
+		{
+			$result = $this->get_sproc("GET_FINISHORDER");
+			$this->response($this->json($result), 200);
+		}
+		catch (Exception $e)
+		{
+			$this->response('{"ID":"-1"}',400);
+		}	
+	}	
+	
 	public function startrace()
 	{
 		try
@@ -65,7 +79,7 @@ class Times extends APIInterface
 			
 			$result = $this->call_sproc("SP_FINISHRACER($racernum, '$finishtime')");
 			
-			$resp = $this->get_sproc("GET_RACEFINISHERS");
+			//$resp = $this->get_sproc("GET_FINISHORDER");
 			
 			$this->response(json_encode($resp), 200);
 		}
@@ -77,12 +91,18 @@ class Times extends APIInterface
 	}	
 	
 	
+	public function bulkUpload()
+	{
+	}
+	
 	//Overall Finishers
 	public function reportOverall()
 	{
 		try
 		{
-			$result = $this->get_sproc("REPORT_OVERALL");
+			$postjson = json_decode(file_get_contents("php://input"),true);
+			$raceid = $postjson['raceID'];
+			$result = $this->get_sproc("REPORT_OVERALL ($raceid)");
 			$this->response(json_encode($result), 200);
 		}
 		catch (Exception $e)
@@ -96,7 +116,10 @@ class Times extends APIInterface
 	{
 		try
 		{
-			$result = $this->get_sproc("REPORT_OVERALL_UNDER19");
+			$postjson = json_decode(file_get_contents("php://input"),true);
+			$gender = $postjson['gender'];
+			$raceid = $postjson['raceID'];
+			$result = $this->get_sproc("REPORT_OVERALL_UNDER19 ($raceid, '$gender')");
 			$this->response(json_encode($result), 200);
 		}
 		catch (Exception $e)
@@ -110,7 +133,11 @@ class Times extends APIInterface
 	{
 		try
 		{
-			$result = $this->get_sproc("REPORT_OVERALL_19OVER");
+			$postjson = json_decode(file_get_contents("php://input"),true);
+			$raceid = $postjson['raceID'];
+			$gender = $postjson['gender'];
+
+			$result = $this->get_sproc("REPORT_OVERALL_19OVER($raceid, '$gender')");
 			$this->response(json_encode($result), 200);
 		}
 		catch (Exception $e)
@@ -124,7 +151,9 @@ class Times extends APIInterface
 	{
 		try
 		{
-			$result = $this->get_sproc("REPORT_OVERALL_FIN");
+			$postjson = json_decode(file_get_contents("php://input"),true);
+			$raceid = $postjson['raceID'];
+			$result = $this->get_sproc("REPORT_OVERALL_FIN($raceid)");
 			$this->response(json_encode($result), 200);
 		}
 		catch (Exception $e)
@@ -143,8 +172,9 @@ class Times extends APIInterface
 			$raceid = $postjson['raceID'];
 			$minAge = $postjson['minAge'];
 			$maxAge = $postjson['maxAge'];
+			$gender = $postjson['gender'];
 			
-			$result = $this->get_sproc("REPORT_WINNERS_BY_RACE_AGE($raceid, $minAge, $maxAge)");
+			$result = $this->get_sproc("REPORT_WINNERS_BY_RACE_AGE($raceid, $minAge, $maxAge, '$gender')");
 			$this->response(json_encode($result), 200);
 		}
 		catch (Exception $e)
