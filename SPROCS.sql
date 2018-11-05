@@ -17,6 +17,25 @@ ORDER BY averageDate$$
 DELIMITER ;
 
 DELIMITER $$
+CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `GET_RACEFINISHERS`()
+    NO SQL
+SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName,
+    s.LastName, s.City, s.Country, r.Description,
+    r.Cap, r.CapHex, rs.HasFins,
+    FROM_UNIXTIME(AVG(UNIX_TIMESTAMP(ts.FinishTime)))
+    AS averageDate,
+    tr.StartTime
+FROM Races r, RaceSwimmers rs, Swimmers s,
+    TimeSwimmer ts, TimeRace tr
+WHERE rs.SwimmerID = s.ID
+AND rs.RaceID = r.ID
+AND tr.RaceID = r.ID
+AND ts.RaceSwimmerID = rs.ID
+GROUP BY ts.RaceSwimmerID
+ORDER BY rs.RaceID, averageDate$$
+DELIMITER ;
+
+DELIMITER $$
 CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `GET_FINISHORDER`()
     NO SQL
 SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName,
@@ -35,6 +54,15 @@ ORDER BY averageDate$$
 DELIMITER ;
 
 DELIMITER $$
+CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `GET_RACERCOUNTS`()
+    NO SQL
+SELECT r.ID, r.Description, COUNT(rs.ID) as Swimmers
+FROM RaceSwimmers AS rs, Races r
+WHERE rs.RaceID = r.ID
+GROUP BY r.ID$$
+DELIMITER ;
+
+DELIMITER $$
 CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `GET_NONRACERS`()
     NO SQL
 SELECT s.ID, s.FirstName, s.LastName
@@ -42,12 +70,6 @@ FROM Swimmers s
 WHERE s.ID NOT IN (
     SELECT SwimmerID FROM RaceSwimmers)
     ORDER BY s.LastName LIMIT 0, 300$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `GET_RACES`()
-SELECT r.ID, r.Description, r.CapHex, r.Cap
-FROM Races r$$
 DELIMITER ;
 
 DELIMITER $$
@@ -70,28 +92,18 @@ LEFT JOIN TimeSwimmer ts ON ts.RaceSwimmerID = rs.ID
 DELIMITER ;
 
 DELIMITER $$
+CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `GET_RACES`()
+SELECT r.ID, r.Description, r.CapHex, r.Cap
+FROM Races r$$
+DELIMITER ;
+
+DELIMITER $$
 CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `GET_RACETIMES`()
     NO SQL
 SELECT r.ID, r.Description, r.CapHex, t.StartTime
 FROM Races r
 LEFT JOIN TimeRace t ON r.ID = t.RaceID
-AND t.IsEnabled = 1$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `GET_SWIMMERS`()
-    NO SQL
-SELECT ID, FirstName, LastName, Gender, Birthdate
-FROM Swimmers$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `INSERT_RACER`(IN `racernumber` INT, IN `swimmerid` INT, IN `raceid` INT, IN `hasfins` INT)
-    NO SQL
-INSERT INTO RaceSwimmers
-    (SwimmerID, RaceID, RacerNumber, HasFins)
-VALUES
-    (swimmerid, raceid, racernumber, hasfins)$$
+AND t.Status = 1$$
 DELIMITER ;
 
 DELIMITER $$
@@ -104,12 +116,47 @@ WHERE s.ID = in_swimmerid$$
 DELIMITER ;
 
 DELIMITER $$
+CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `INSERT_RACER`(IN `racernumber` INT, IN `swimmerid` INT, IN `raceid` INT, IN `hasfins` INT)
+    NO SQL
+INSERT INTO RaceSwimmers
+    (SwimmerID, RaceID, RacerNumber, HasFins)
+VALUES
+    (swimmerid, raceid, racernumber, hasfins)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `GET_RACERS`()
+    NO SQL
+SELECT rs.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName,
+    s.LastName,s.Gender, s.Birthdate, s.City, s.Country,
+    r.Description, r.Cap, rs.HasFins
+FROM RaceSwimmers rs, Races r, Swimmers s
+WHERE rs.SwimmerID = s.ID
+AND rs.RaceID = r.ID
+ORDER BY s.LastName, s.FirstName$$
+DELIMITER ;
+
+DELIMITER $$
 CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `INSERT_SWIMMER`(IN `in_firstname` VARCHAR(255), IN `in_lastname` VARCHAR(255), IN `in_city` VARCHAR(64), IN `in_country` VARCHAR(64), IN `in_birthdate` DATE, IN `in_gender` VARCHAR(4))
     NO SQL
 Insert INTO Swimmers (FirstName, LastName, Gender,
         Birthdate, City, Country)
 VALUES (in_firstname, in_lastname, in_gender,
         in_birthdate, in_city, in_country)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `GET_SWIMMERS`()
+    NO SQL
+SELECT ID, FirstName, LastName, Gender, Birthdate
+FROM Swimmers$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `INSERT_TIMERACE`(IN `in_race` INT, IN `in_date` DATETIME, IN `in_enable` INT)
+    NO SQL
+INSERT INTO TimeRace (RaceID, StartTime, Status)
+    VALUES (in_race, in_date, in_enable)$$
 DELIMITER ;
 
 DELIMITER $$
@@ -133,29 +180,25 @@ LIMIT 5$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `GET_RACEFINISHERS`()
+CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `REPORT_OVERALL_FIN`()
     NO SQL
-SELECT r.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName,
-    s.LastName, s.City, s.Country, r.Description,
-    r.Cap, r.CapHex, rs.HasFins,
+SELECT r.ID, rs.RacerNumber, rs.SwimmerID,
+    s.FirstName, s.LastName, s.Gender, s.Birthdate,
+    s.City, s.Country,
+    TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) as Age,
     FROM_UNIXTIME(AVG(UNIX_TIMESTAMP(ts.FinishTime)))
-    AS averageDate,
+        AS EndTime,
     tr.StartTime
 FROM Races r, RaceSwimmers rs, Swimmers s,
     TimeSwimmer ts, TimeRace tr
 WHERE rs.SwimmerID = s.ID
-AND rs.RaceID = r.ID
-AND tr.RaceID = r.ID
-AND ts.RaceSwimmerID = rs.ID
-GROUP BY ts.RaceSwimmerID
-ORDER BY rs.RaceID, averageDate$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `INSERT_TIMERACE`(IN `in_race` INT, IN `in_date` DATETIME, IN `in_enable` INT)
-    NO SQL
-INSERT INTO TimeRace (RaceID, StartTime, IsEnabled)
-    VALUES (in_race, in_date, in_enable)$$
+    AND rs.RaceID = r.ID
+    AND tr.RaceID = r.ID
+    AND ts.RaceSwimmerID = rs.ID
+    AND rs.HasFins = 1
+    GROUP BY ts.RaceSwimmerID
+    ORDER BY EndTime
+    LIMIT 1$$
 DELIMITER ;
 
 DELIMITER $$
@@ -208,60 +251,6 @@ WHERE rs.SwimmerID = s.ID
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `REPORT_OVERALL_FIN`()
-    NO SQL
-SELECT r.ID, rs.RacerNumber, rs.SwimmerID,
-    s.FirstName, s.LastName, s.Gender, s.Birthdate,
-    s.City, s.Country,
-    TIMESTAMPDIFF(YEAR, s.Birthdate, NOW()) as Age,
-    FROM_UNIXTIME(AVG(UNIX_TIMESTAMP(ts.FinishTime)))
-        AS EndTime,
-    tr.StartTime
-FROM Races r, RaceSwimmers rs, Swimmers s,
-    TimeSwimmer ts, TimeRace tr
-WHERE rs.SwimmerID = s.ID
-    AND rs.RaceID = r.ID
-    AND tr.RaceID = r.ID
-    AND ts.RaceSwimmerID = rs.ID
-    AND rs.HasFins = 1
-    GROUP BY ts.RaceSwimmerID
-    ORDER BY EndTime
-    LIMIT 1$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `SP_FINISHRACER`(IN `in_racernumber` INT, IN `in_finishtime` DATETIME)
-    NO SQL
-INSERT INTO TimeSwimmer (RaceSwimmerID, FinishTime, IsEnabled)
-VALUES (
-    (SELECT rs.ID
-     FROM RaceSwimmers rs
-     WHERE rs.RacerNumber = in_racernumber),
-    in_finishtime,
-    1)$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `SP_RESETTIMERACE`(IN `in_race` INT)
-    NO SQL
-UPDATE TimeRace
-    SET IsEnabled = 0
-    WHERE RaceID = in_race$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `GET_RACERS`()
-    NO SQL
-SELECT rs.ID, rs.RacerNumber, rs.SwimmerID, s.FirstName,
-    s.LastName,s.Gender, s.Birthdate, s.City, s.Country,
-    r.Description, r.Cap, rs.HasFins
-FROM RaceSwimmers rs, Races r, Swimmers s
-WHERE rs.SwimmerID = s.ID
-AND rs.RaceID = r.ID
-ORDER BY s.LastName, s.FirstName$$
-DELIMITER ;
-
-DELIMITER $$
 CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `REPORT_OVERALL_UNDER19`()
     NO SQL
 SELECT r.ID, rs.RacerNumber, rs.SwimmerID,
@@ -286,23 +275,23 @@ WHERE rs.SwimmerID = s.ID
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `UPDATE_SWIMMER`(IN `in_swimmerid` INT, IN `in_city` VARCHAR(50), IN `in_country` VARCHAR(64), IN `in_birthdate` DATE, IN `in_firstname` VARCHAR(255), IN `in_lastname` VARCHAR(255), IN `in_gender` VARCHAR(4))
+CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `SP_RESETTIMERACE`(IN `in_race` INT)
     NO SQL
-UPDATE Swimmers
-SET Gender=in_gender,
-    Birthdate=in_birthdate,
-    City=in_city,
-    Country=in_country
-WHERE ID=in_swimmerid$$
+UPDATE TimeRace
+    SET Status = 0
+    WHERE RaceID = in_race$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `GET_RACERCOUNTS`()
+CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `SP_FINISHRACER`(IN `in_racernumber` INT, IN `in_finishtime` DATETIME)
     NO SQL
-SELECT r.ID, r.Description, COUNT(rs.ID) as Swimmers
-FROM RaceSwimmers AS rs, Races r
-WHERE rs.RaceID = r.ID
-GROUP BY r.ID$$
+INSERT INTO TimeSwimmer (RaceSwimmerID, FinishTime, Status)
+VALUES (
+    (SELECT rs.ID
+     FROM RaceSwimmers rs
+     WHERE rs.RacerNumber = in_racernumber),
+    in_finishtime,
+    1)$$
 DELIMITER ;
 
 DELIMITER $$
@@ -314,4 +303,15 @@ SET SwimmerID=in_swimmerid,
     RacerNumber=in_racernumber,
     HasFins=in_hasfins
 WHERE ID=in_raceswimmerid$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`swimrace`@`localhost` PROCEDURE `UPDATE_SWIMMER`(IN `in_swimmerid` INT, IN `in_city` VARCHAR(50), IN `in_country` VARCHAR(64), IN `in_birthdate` DATE, IN `in_firstname` VARCHAR(255), IN `in_lastname` VARCHAR(255), IN `in_gender` VARCHAR(4))
+    NO SQL
+UPDATE Swimmers
+SET Gender=in_gender,
+    Birthdate=in_birthdate,
+    City=in_city,
+    Country=in_country
+WHERE ID=in_swimmerid$$
 DELIMITER ;
