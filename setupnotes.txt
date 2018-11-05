@@ -1,0 +1,10 @@
+
+1) Build LAMP stack
+    - Apache2
+    - MariaDB
+    - phpmysql
+2) Install DB
+    - Run swimrace.sql
+    - Run SPROCS.sql
+    - Create db user
+3) Verify application runs
