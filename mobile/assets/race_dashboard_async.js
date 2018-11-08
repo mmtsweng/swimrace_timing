@@ -67,7 +67,7 @@ function GetRaceFinisherCounts()
                     var pct=0;
                     if (item.Finishers != "0")
                     {
-                        pct = Math.ceil(Number(item.Finishers) / Number(item.Swimmers))
+                        pct = Math.ceil((item.Finishers / item.Swimmers)*100);
                     }
                     UpdateFinisherCounts($('#gauge' + i), pct, item.Finishers, item.Swimmers);
                 }
