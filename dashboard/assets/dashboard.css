@@ -17,11 +17,11 @@ padding-left: 25px;
 }
 
 body{
-background-image : url('/dashboard/assets/fulldesign2015.png ');
+background-image : url('/dashboard/assets/AK_StCroix_2018.png');
 background-attachment : fixed;
 background-repeat : no-repeat;
-background-size: 100%, auto;
-/*background-position: 25px 15px*/
+background-size: 40%, auto;
+background-position: 25px 15px;
 margin: 30px 30px 30px 30px;
 }
 
@@ -121,6 +121,10 @@ width: 90%;
 #finishedScrolling
 {
 height: 60%;
+}
+#spacer
+{
+height: 40%;
 }
 
 /* SLIDESHOW */

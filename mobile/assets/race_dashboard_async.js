@@ -2,7 +2,7 @@
 //OnReady, initiate the gauges
 $(function()
 {
-    RefreshGauges();
+        ResetSwimmerCounts();
 });
 
 //User requeste a reset of swimmer counts

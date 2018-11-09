@@ -1,19 +1,3 @@
-<?php
-    require_once("apiurl.php");
-
-    $response = file_get_contents($api . 'racefinishercount');
-
-    try
-    {
-        $swimmers = json_decode($response, true);
-    }
-    catch (Exception $e)
-    {
-
-    }
-
-?>
-
 <html>
 <head>
     <title>Dashboard</title>
@@ -28,7 +12,8 @@
 <body>
     <?php include 'layoutnav.php' ?>
     <div id='dashboard'>
-        <H1>Race Times</H1>
+        <img src='assets/reset.png' class='reset' onclick='ResetSwimmerCounts()'/>
+        <H1 style='padding-top:30px'>Race Times</H1>
         <div style='display:table; width:100%; padding-bottom:30px'>
             <div><strong>5 Mile Race:</strong><span id='racetime1'></span></div>
             <div><strong>2 Mile Race:</strong><span id='racetime2'></span></div>
@@ -36,7 +21,7 @@
         </div>
 
 
-        <H1>Swimmer / Finisher counts - <img src='assets/reset.png' class='reset' onclick='ResetSwimmerCounts()'/> </H1>
+        <H1>Swimmer / Finisher counts</H1>
         <div id='gauges'>
         <?php
         $idx = 0;
