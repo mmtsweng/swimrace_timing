@@ -85,14 +85,14 @@ width: 900px;
 table-layout: fixed;
 }
 
-.finisherTable td
+.finisherTable td, .finisherTableSpace td
 {
 padding-left: 10px;
 font-size: 12pt;
 font-weight: bold;
 padding-top: 10px;
 }
-.finisherTable thead td
+.finisherTable thead td, .finisherTableSpace thead td
 {
 font-weight: bold;
 color: Red;

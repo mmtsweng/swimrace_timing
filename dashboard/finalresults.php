@@ -8,7 +8,7 @@
     $(function()
     {
         $('#finishedScrolling').ScrollTo({
-            duration: 10000, //100000,
+            duration: 100000,
             easing: 'linear',
             callback: function(){location.reload();}
         });

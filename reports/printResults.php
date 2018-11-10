@@ -10,7 +10,7 @@ function printResultTables($result, $heading)
         foreach($result as $row)
         {
             print "<tr><td style='width:30px'>".$position."</td><td>"
-                .timerFormat($row["StartTime"], $row["averageDate"], true)."</td><td>"
+                .timerFormat($row["StartTime"], $row["EndTime"], true)."</td><td>"
                 .$row["LastName"].", ".$row["FirstName"]."</td><td>"
                 .$row["City"]. "," .$row["Country"]
                 ."</td></tr>";
@@ -81,8 +81,9 @@ function timerFormat($start_time, $end_time, $hms = true)
 {
     $dateStart = new DateTime($start_time);
     $dateEnd = new DateTime($end_time);
+    //$dateDiff = date_diff($end_time, $start_time);
     $dateDiff = $dateEnd->diff($dateStart);
-    return $dateDiff->format("%H:%I:%S");
+    return sprintf('%02d:%02d:%02d', $dateDiff->h, $dateDiff->m, $dateDiff->s);
 }
 
 function callAPI($api, $data){
