@@ -27,8 +27,8 @@ function UpdateRacers()
 {
     $.ajax(
     {
-        //url: '/api.php?r=racefinishers',
-        url: '/api.php?r=racersswimming',
+        url: '/api.php?r=racefinishers',
+        //url: '/api.php?r=racersswimming',
         type: 'get',
         contentType: 'application/json',
         dataType: 'json'
@@ -45,7 +45,7 @@ function UpdateRacers()
          * {"ID":"1","RacerNumber":"28","SwimmerID":"84","FirstName":"Nicole","LastName":"Angeli","City":"Cabo Rojo","Country":"PR","Description":"5 Mile","Cap":"Yellow","CapHex":"#FFFF00","HasFins":"0","averageDate":"2018-11-08 13:55:07.0000","Age":"31","StartTime":"2018-11-08 14:30:08"},
          * {"ID":"1","RacerNumber":"59","SwimmerID":"115","FirstName":"Alex ","LastName":"Kostich","City":"Los Angeles","Country":"CA","Description":"5 Mile","Cap":"Yellow","CapHex":"#FFFF00","HasFins":"0","averageDate":"2018-11-08 13:56:38.0000","Age":null,"StartTime":"2018-11-08 14:30:08"}
          */
-        if (data != null && data != undefined)
+        if (data != null && data != undefined && data!="")
         {
             pos=1;
             $('.finisherTable > tbody').empty();

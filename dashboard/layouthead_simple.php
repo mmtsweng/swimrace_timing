@@ -7,6 +7,7 @@
     <script type="text/javascript" src="assets/dashboard.js"></script>
     <script type="text/javascript" src="assets/jquery-scrollto.js"></script>
     <script type="text/javascript" src="/shared/time_functions.js"></script>
+    <script type="text/javascript" src="/shared/raceTimes_async.js"></script>
     <link href="assets/dashboard.css" rel="stylesheet" type="text/css" />
 
 

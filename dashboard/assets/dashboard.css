@@ -17,12 +17,31 @@ padding-left: 25px;
 }
 
 body{
-background-image : url('/dashboard/assets/AK_StCroix_2018.png');
+background-image : url('/dashboard/assets/2018_logo.jpg');
 background-attachment : fixed;
 background-repeat : no-repeat;
-background-size: 40%, auto;
+background-size: 30%, auto;
 background-position: 25px 15px;
 margin: 30px 30px 30px 30px;
+}
+
+#logo
+{
+position: fixed;
+bottom: 0;
+right: 0;
+height: 400px;
+}
+#logo > img
+{
+display: block;
+width: auto;
+height: 100%;
+}
+
+.heading
+{
+margin-left: 40%
 }
 
 .raceTimes
@@ -42,10 +61,9 @@ text-align: center;
 .pageContent
 {
 float: left;
-margin-top: 200px;
-margin-left: 200px;
+margin-top: 180px;
+margin-left: 100px;
 display: block;
-width:60%;
 /*border: blue 1px solid;*/
 
 }
@@ -58,9 +76,7 @@ margin-top: 80px;
 /* Results Table */
 .finisherTable
 {
-    left: 50%;
-    margin-left: -50px;
-    width: 800px;
+    width: 900px;
  }
 .finisherTable td
 {

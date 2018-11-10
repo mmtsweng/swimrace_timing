@@ -1,3 +1,19 @@
+<?php
+    require_once("apiurl.php");
+
+    $response = file_get_contents($api . 'racefinishercount');
+
+    try
+    {
+        $swimmers = json_decode($response, true);
+    }
+    catch (Exception $e)
+    {
+
+    }
+
+?>
+
 <html>
 <head>
     <title>Dashboard</title>
