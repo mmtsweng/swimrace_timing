@@ -31,6 +31,7 @@ position: fixed;
 bottom: 0;
 right: 0;
 height: 400px;
+z-index: -1;
 }
 #logo > img
 {
@@ -62,7 +63,7 @@ text-align: center;
 {
 float: left;
 margin-top: 180px;
-margin-left: 100px;
+margin-left: 60px;
 display: block;
 /*border: blue 1px solid;*/
 
@@ -72,12 +73,18 @@ text-align: center;
 margin-top: 80px;
 }
 
-
 /* Results Table */
+
 .finisherTable
 {
-    width: 900px;
- }
+width: 900px;
+}
+.finisherTableSpace
+{
+width: 900px;
+table-layout: fixed;
+}
+
 .finisherTable td
 {
 padding-left: 10px;
@@ -104,14 +111,23 @@ background-repeat: no-repeat;
 }
 .finisherTable .Yellow
 {
+background-position: center;
+background-size: 30px 30px;
+background-repeat: no-repeat;
 background-image : url('/dashboard/assets/yellowcap.png');
 }
 .finisherTable .Pink
 {
+background-position: center;
+background-size: 30px 30px;
+background-repeat: no-repeat;
 background-image : url('/dashboard/assets/pinkcap.png');
 }
 .finisherTable .Green
 {
+background-position: center;
+background-size: 30px 30px;
+background-repeat: no-repeat;
 background-image : url('/dashboard/assets/greencap.png');
 }
 .finisherTable .hasFins
@@ -131,7 +147,7 @@ background-image : url('/dashboard/assets/fins.png');
 {
 height: 60%;
 overflow: hidden;
-width: 90%;
+width: 100%;
 /* border: red 1px solid; */
 }
 #finishedScrolling

@@ -2,23 +2,28 @@
 <head>
     <?php include 'layouthead_simple.php';
     $showRaceTimes = true; ?>
+    <script lang="JavaScript">
+    $(function()
+    {
+        UpdateRacers();
+    });
+</script>
 </head>
 
 
 <body>
-    <H1 class='heading'>Unofficial Results</H1>
+    <H1 class='heading'>Unofficial Order of Finish</H1>
     <?php include 'layoutprecontent.php' ?>
     <div id="scrollableTable">
         <div id='startScrolling'/>
         <table id="finisherTable" class='finisherTable'>
             <thead>
                 <tr>
-                <td>Position</td>
-                <td>Number</td>
-                <td>Race</td>
+                <td>Pos</td>
+                <td colspan=3>Number</td>
                 <td>Name</td>
                 <td>Location</td>
-                <td>Race Time</td>
+                <td>Time</td>
                 </tr>
             </thead>
             <tbody>

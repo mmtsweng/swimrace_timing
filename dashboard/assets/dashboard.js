@@ -1,19 +1,5 @@
 var pos;
 
-$(function()
-{
-    UpdateRacers();
-
-//    $('#finishedScrolling').scrollIntoView({behavior: "slow", block: "end"});
-/*
-    $('html, body').animate({
-       scrollTop: $('#finishedScrolling').offset().top
-       //scrollTop: $('#your-id').offset().top
-       //scrollTop: $('.your-class').offset().top
-    }, 'slow');
-*/
-});
-
 function ScrollRacers()
 {
     $('#finishedScrolling').ScrollTo({
@@ -27,7 +13,7 @@ function UpdateRacers()
 {
     $.ajax(
     {
-        url: '/api.php?r=racefinishers',
+        url: '/api.php?r=finishorder',
         //url: '/api.php?r=racersswimming',
         type: 'get',
         contentType: 'application/json',
@@ -47,10 +33,17 @@ function UpdateRacers()
          */
         if (data != null && data != undefined && data!="")
         {
+            var fins;
+            var time;
             pos=1;
             $('.finisherTable > tbody').empty();
             $.each(data, function(i, item) {
-                $('#finisherTable > tbody').append("<tr><td>" + pos + "</td><td>" + item.RacerNumber + "</td><td>" + item.Description + "</td><td>" + item.LastName + ", " + item.FirstName + "</td></tr>");
+                (item.HasFins == 0) ? fins='' : fins='hasFins';
+                time = DateDiff (item.StartTime, item.averageDate, true);
+                $('#finisherTable > tbody').append("<tr><td>" + pos + "</td><td>" + item.RacerNumber + "</td><td class='" + item.Cap + "'></td>"
+                    + "<td class='" + fins + "'></td><td>" + item.LastName + ", " + item.FirstName
+                    + "<td>" + item.City + "," + item.Country + "</td>"
+                    + "<td>" + time + "</td></tr>");
                 pos++;
                 if (pos > 60) {return false;}
             });

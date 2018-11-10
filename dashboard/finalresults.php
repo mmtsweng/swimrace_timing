@@ -1,49 +1,36 @@
 <html>
 <head>
-    <?php include 'layouthead.php';
+    <?php include 'layouthead_simple.php';
     $showRaceTimes = false;
-    $showPagination = true; ?>
-    <script>
-        showSeconds = true;
-        showFinals = true;
-        showTruncated = false;
-        showTimes = false;
+    $showPagination = false; ?>
+    <script lang="JavaScript">
 
-        $(function()
-        {
-            //Hide all divs
-            $("#slideshow > div:gt(0)").hide();
-
-
-            setInterval(function() {
-                $('#slideshow > div:first')
-                    .fadeOut(500)
-                    .next()
-                    .fadeIn(500)
-                    .end()
-                    .appendTo('#slideshow');
-                }, 3500);
-
-            /*
-             setInterval(function() {
-                  window.location.reload();
-                }, 300000); )*/
+    $(function()
+    {
+        $('#finishedScrolling').ScrollTo({
+            duration: 10000, //100000,
+            easing: 'linear',
+            callback: function(){location.reload();}
         });
+    });
 
     </script>
 </head>
+
 <body>
+    <H1 class='heading'>2018 Results</H1>
     <?php include 'layoutprecontent.php' ?>
-    <H1>2018 Final Results</H1>
-        <div id="slideshow">
+    <div id='scrollableTable'>
+        <div id='startScrolling'/>
             <?php include '../reports/5Mile.php' ?>
             <?php include '../reports/2Mile.php' ?>
             <?php include '../reports/1Mile.php' ?>
-        </div>
-
+        <div id='spacer'>&nbsp;</div>
+        <div id='finishedScrolling'/>
+    </div>
     <?php include 'layoutpostcontent.php' ?>
+    <div id='logo'><img src='/dashboard/assets/STX2018.jpg'></div>
 </body>
 </html>
-
 
 

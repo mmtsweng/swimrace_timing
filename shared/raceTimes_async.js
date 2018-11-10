@@ -58,19 +58,12 @@ function showTimes()
 function displayElapsed(starttime, el)
 {
     var endTime = new Date();
-    //var time = DateDiff(endTime, starttime, true);
     //console.log(endTime + " - " + starttime);
     var diff = starttime - endTime;
     var seconds = Math.abs(Math.floor((diff % 6e4)/1000));
     var minutes = Math.abs(Math.floor((diff % 3.6e6) / 6e4));
     var hours = Math.abs(Math.floor(diff / 3.6e6));
 
-    var time= hours + ":" + TwoDigits(minutes) + ":" + TwoDigits(seconds);
+    var time= hours + ":" + padLeft(minutes) + ":" + padLeft(seconds);
     $(el).text(time);
 }
-
-function TwoDigits(n)
-{
-    return n>9 ? "" + n : "0" + n;
-}
-
