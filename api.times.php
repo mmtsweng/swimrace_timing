@@ -99,7 +99,8 @@ class Times extends APIInterface
         {
             $postjson = json_decode(file_get_contents("php://input"),true);
             $raceid = $postjson['raceID'];
-            $result = $this->get_sproc("REPORT_OVERALL ($raceid)");
+            $limit = $postjson['limit'];
+            $result = $this->get_sproc("REPORT_OVERALL ($raceid, $limit)");
             $this->response(json_encode($result), 200);
         }
         catch (Exception $e)
@@ -116,7 +117,8 @@ class Times extends APIInterface
             $postjson = json_decode(file_get_contents("php://input"),true);
             $gender = $postjson['gender'];
             $raceid = $postjson['raceID'];
-            $result = $this->get_sproc("REPORT_OVERALL_UNDER19 ($raceid, '$gender')");
+            $limit = $postjson['limit'];
+            $result = $this->get_sproc("REPORT_OVERALL_UNDER19 ($raceid, '$gender', $limit)");
             $this->response(json_encode($result), 200);
         }
         catch (Exception $e)
@@ -133,8 +135,8 @@ class Times extends APIInterface
             $postjson = json_decode(file_get_contents("php://input"),true);
             $raceid = $postjson['raceID'];
             $gender = $postjson['gender'];
-
-            $result = $this->get_sproc("REPORT_OVERALL_19OVER($raceid, '$gender')");
+            $limit = $postjson['limit'];
+            $result = $this->get_sproc("REPORT_OVERALL_19OVER($raceid, '$gender', $limit)");
             $this->response(json_encode($result), 200);
         }
         catch (Exception $e)
@@ -150,7 +152,8 @@ class Times extends APIInterface
         {
             $postjson = json_decode(file_get_contents("php://input"),true);
             $raceid = $postjson['raceID'];
-            $result = $this->get_sproc("REPORT_OVERALL_FIN($raceid)");
+            $limit = $postjson['limit'];
+            $result = $this->get_sproc("REPORT_OVERALL_FIN($raceid, $limit)");
             $this->response(json_encode($result), 200);
         }
         catch (Exception $e)
@@ -170,8 +173,8 @@ class Times extends APIInterface
             $minAge = $postjson['minAge'];
             $maxAge = $postjson['maxAge'];
             $gender = $postjson['gender'];
-
-            $result = $this->get_sproc("REPORT_WINNERS_BY_RACE_AGE($raceid, $minAge, $maxAge, '$gender')");
+            $limit = $postjson['limit'];
+            $result = $this->get_sproc("REPORT_WINNERS_BY_RACE_AGE($raceid, $minAge, $maxAge, '$gender', $limit)");
             $this->response(json_encode($result), 200);
         }
         catch (Exception $e)

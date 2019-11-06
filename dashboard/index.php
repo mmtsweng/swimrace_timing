@@ -23,6 +23,7 @@
                 <td colspan=3>Number</td>
                 <td>Name</td>
                 <td>Location</td>
+                <td>Age</td>
                 <td>Time</td>
                 </tr>
             </thead>

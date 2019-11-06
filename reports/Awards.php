@@ -5,8 +5,7 @@
 </head>
 
 <?php
-
-$limits = false;
+$limits = true;
 include_once("printResults.php");
 
 include_once("5Mile.php");

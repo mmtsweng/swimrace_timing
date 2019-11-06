@@ -1,5 +1,5 @@
 <?php
-
+$limitValue=99;
 
 function printResultTables($result, $heading)
 {
@@ -13,6 +13,7 @@ function printResultTables($result, $heading)
                 .timerFormat($row["StartTime"], $row["EndTime"], true)."</td><td>"
                 .$row["LastName"].", ".$row["FirstName"]."</td><td>"
                 .$row["City"]. "," .$row["State"]. " " .$row["Country"]
+                ."</td><td>".$row["Age"]."</td>"
                 ."</td></tr>";
             $position++;
         }
@@ -74,6 +75,7 @@ function printTableHead($heading, $closeTable=false)
         . "<td>Time</td>"
         . "<td>Name</td>"
         . "<td>Location</td>"
+        . "<td>Age</td>"
         . "</tr></thead><tbody>";
 }
 

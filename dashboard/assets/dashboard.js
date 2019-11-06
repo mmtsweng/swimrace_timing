@@ -7,6 +7,19 @@ function UpdateDashboard()
     ScrollRacers();
 }
 
+function GetAge(dateString)
+{
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
+    {
+        age--;
+    }
+    return age;
+}
+
 function ScrollResults()
 {
     $('#scrollableTable').scrollTo($('#finishedScrolling'), {
@@ -69,27 +82,20 @@ function UpdateRacers()
         {
             var fins;
             var time;
+            var age;
             pos=1;
             $('.finisherTable > tbody').empty();
             $.each(data, function(i, item) {
                 (item.HasFins == 0) ? fins='' : fins='hasFins';
                 time = DateDiff (item.StartTime, item.averageDate, true);
+                age = GetAge(item.Birthdate);
                 $('#finisherTable > tbody').append("<tr><td>" + pos + "</td><td>" + item.RacerNumber + "</td><td class='" + item.Cap + "'></td>"
                     + "<td class='" + fins + "'></td><td>" + item.LastName + ", " + item.FirstName
                     + "<td>" + item.City + "," + item.State + "</td>"
+                    + "<td>" + age + ","
                     + "<td>" + time + "</td></tr>");
                 pos++;
             });
-
-            /*
-            var rnd = Math.floor(Math.random() * 20) //Random number between 1 and 200
-            console.log ("Generating " + rnd + " entries");
-            for (i=0; i<rnd; i++)
-            {
-                $('#finisherTable > tbody').append("<tr><td>" + pos + "</td><td>99</td><td class='Yellow'></td>"
-                    + "<td class=''></td><td>LastName, FirstName<td>City,State</td><td>H:MM:SS</td></tr>");
-                pos++;
-            }*/
 
             UpdateDashboard();
         }
