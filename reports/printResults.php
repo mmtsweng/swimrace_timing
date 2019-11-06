@@ -12,7 +12,7 @@ function printResultTables($result, $heading)
             print "<tr><td style='width:30px'>".$position."</td><td>"
                 .timerFormat($row["StartTime"], $row["EndTime"], true)."</td><td>"
                 .$row["LastName"].", ".$row["FirstName"]."</td><td>"
-                .$row["City"]. "," .$row["Country"]
+                .$row["City"]. "," .$row["State"]. " " .$row["Country"]
                 ."</td></tr>";
             $position++;
         }
@@ -40,7 +40,7 @@ function printResultTablesPaged($result, $heading)
             print "<tr><td>".$position."</td><td>"
                 .timerFormat($row["StartTime"], $row["averageDate"], true)."</td><td>"
                 .$row["LastName"].", ".$row["FirstName"]."</td><td>"
-                .$row["City"]. "," .$row["Country"]
+                .$row["City"]. "," .$row["State"]. " " .$row["Country"]
                 ."</td></tr>";
             $position++;
             $pagePosition++;

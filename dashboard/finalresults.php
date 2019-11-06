@@ -1,25 +1,20 @@
 <html>
 <head>
-    <?php include 'layouthead_simple.php';
+    <?php include 'layouthead.php';
     $showRaceTimes = false;
     $showPagination = false; ?>
     <script lang="JavaScript">
-
     $(function()
     {
-        $('#finishedScrolling').ScrollTo({
-            duration: 100000,
-            easing: 'linear',
-            callback: function(){location.reload();}
-        });
+        ScrollResults();
     });
-
     </script>
 </head>
 
 <body>
-    <H1 class='heading'>2018 Results</H1>
+    <div id='CoralReef'></div>
     <?php include 'layoutprecontent.php' ?>
+    <H1 class='heading'>2019 Coral Reef Swim<br> Results</H1>
     <div id='scrollableTable'>
         <div id='startScrolling'/>
             <?php include '../reports/5Mile.php' ?>
@@ -29,7 +24,7 @@
         <div id='finishedScrolling'/>
     </div>
     <?php include 'layoutpostcontent.php' ?>
-    <div id='logo'><img src='/dashboard/assets/STX2018.jpg'></div>
+    <div id='logo'></div>
 </body>
 </html>
 

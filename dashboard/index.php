@@ -1,25 +1,25 @@
 <html>
 <head>
-    <?php include 'layouthead_simple.php';
-    $showRaceTimes = true; ?>
+    <?php include 'layouthead.php';?>
     <script lang="JavaScript">
     $(function()
     {
-        UpdateRacers();
+        UpdateDashboard();
     });
-</script>
+    </script>
 </head>
 
 
 <body>
-    <H1 class='heading'>Unofficial Order of Finish</H1>
+    <div id='CoralReef'></div>
     <?php include 'layoutprecontent.php' ?>
+    <H1 class='heading'>Unofficial Order of Finish</H1>
     <div id="scrollableTable">
-        <div id='startScrolling'/>
+        <div id='startScrolling'></div>
         <table id="finisherTable" class='finisherTable'>
             <thead>
                 <tr>
-                <td>Pos</td>
+                <td>Overall</td>
                 <td colspan=3>Number</td>
                 <td>Name</td>
                 <td>Location</td>
@@ -30,9 +30,9 @@
             </tbody>
         </table>
         <div id='spacer'>&nbsp;</div>
-        <div id='finishedScrolling'/>
+        <div id='finishedScrolling'></div>
     </div>
     <?php include 'layoutpostcontent.php' ?>
-    <div id='logo'><img src='/dashboard/assets/STX2018.jpg'></div>
+    <div id='logo'></div>
 </body>
 </html>

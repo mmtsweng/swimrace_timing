@@ -13,7 +13,6 @@
 	<?php } ?>
 	&nbsp;
 </div>
-<div class='pageContent'>
 
 	
 

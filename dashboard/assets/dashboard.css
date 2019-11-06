@@ -17,40 +17,45 @@ padding-left: 25px;
 }
 
 body{
-background-image : url('/dashboard/assets/2018_logo.jpg');
-background-attachment : fixed;
-background-repeat : no-repeat;
-background-size: 30%, auto;
-background-position: 25px 15px;
-margin: 30px 30px 30px 30px;
+}
+
+#CoralReef
+{
+position: fixed;
+background-image : url('/dashboard/assets/CoralReefSwim.png');
+background-repeat: no-repeat
+background-size : 100%, auto;
+top: 30;
+left: 30;
+width: 435px;
+height: 170px;
+z-index: -1;
 }
 
 #logo
 {
 position: fixed;
-bottom: 0;
-right: 0;
-height: 400px;
+background-image : url('/dashboard/assets/2019_logo.png');
+background-size: 100%, auto;
+bottom: 30;
+right: 30;
+width: 400px;
+height: 488px;
 z-index: -1;
-}
-#logo > img
-{
-display: block;
-width: auto;
-height: 100%;
 }
 
 .heading
 {
-margin-left: 40%
+padding-top: 30px;
+text-align: center;
 }
 
 .raceTimes
 {
     font-size: 8pt;
     position:absolute;
-    top:20;
-    right:20;
+    top:30;
+    right:30;
 }
 .raceTimes p
 {
@@ -59,25 +64,42 @@ clear: both;
 text-align: center;
 }
 
-.pageContent
-{
-float: left;
-margin-top: 180px;
-margin-left: 60px;
-display: block;
-/*border: blue 1px solid;*/
 
+/* SCROLLING */
+#scrollableTable
+{
+height: 70%;
+overflow: hidden;
+width: 80%;
+/*border: red 1px solid;*/
+margin-left: 20px;
+margin-top: 105px;
 }
-.pageContent h1, .pageContent h2, .pageContent h3{
-text-align: center;
-margin-top: 80px;
+#finishedScrolling
+{
+height: 60%;
+/*border: blue 1px solid;*/
 }
+#startScrolling
+{
+height: 80%;
+/*border: purple 1px solid;*/
+}
+
+#spacer
+{
+height: 40%;
+/*border: green 1px solid;*/
+}
+
+
 
 /* Results Table */
 
 .finisherTable
 {
-width: 900px;
+width: 90%;
+/*margin-top: 120px;*/
 }
 .finisherTableSpace
 {
@@ -140,40 +162,6 @@ background-image : url('/dashboard/assets/fins.png');
 .finisherTable .location
 {
     text-align: right;
-}
-
-/* SCROLLING */
-#scrollableTable
-{
-height: 60%;
-overflow: hidden;
-width: 100%;
-/* border: red 1px solid; */
-}
-#finishedScrolling
-{
-height: 60%;
-}
-#spacer
-{
-height: 40%;
-}
-
-/* SLIDESHOW */
-#slideshow
-{
-    position: relative;
-    margin: 10px auto;
-}
-
-#slideshow > div
-{
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    right: 1px;
-    bottom: 1px;
-    width: 70%;
 }
 
 

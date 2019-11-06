@@ -15,6 +15,7 @@ function parseDT(dt)
     return result;
 }
 
+// Get the Current local time in yyyy-MM-DD HH:mm:ss format
 function JSONLocalTime ()
 {
     var d = new Date();
@@ -30,23 +31,12 @@ function JSONLocalTime ()
 //DateDiff
 function DateDiff(starttime, endtime, showSeconds)
 {
-    /*
-    var timeDiff = Math.abs(endtime - starttime) / 1000;
-    var days = Math.floor(timeDiff / 86400);
-    timeDiff -= days * 86400;
-    var hours = Math.floor(timeDiff / 3600) % 24;
-    timeDiff -= hours * 3600;
-    var minutes = Math.floor(timeDiff / 60) % 60;
-    timeDiff -= minutes * 60;
-    var seconds = Math.floor(timeDiff % 60);
-    */
-    var st = new Date(starttime);
-    var et = new Date(endtime);
-    var diff = st - et;
-    //console.log (endtime + "-" + starttime + "= " + diff);
-    var seconds = Math.abs(Math.floor((diff % 6e4)/1000));
-    var minutes = Math.abs(Math.floor((diff % 3.6e6) / 6e4));
-    var hours = Math.abs(Math.floor(diff / 3.6e6));
+    var diff =  Math.abs(new Date(endtime) - new Date(starttime));
+    var seconds = Math.floor(diff/1000); //ignore any left over units smaller than a second
+    var minutes = Math.floor(seconds/60);
+    seconds = seconds % 60;
+    var hours = Math.floor(minutes/60);
+    minutes = minutes % 60;
 
     if (showSeconds)
     {

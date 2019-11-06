@@ -1,20 +1,54 @@
 var pos;
 
+function UpdateDashboard()
+{
+    console.log('update dashboard');
+    callRaceTimesAPI();
+    ScrollRacers();
+}
+
+function ScrollResults()
+{
+    $('#scrollableTable').scrollTo($('#finishedScrolling'), {
+        duration: 1000 * 60 * 1, //3 minutes
+        easing: 'linear',
+        onAfter: function(){
+            requestAnimationFrame(function() {
+                    $('#scrollableTable').scrollTo($('#startScrolling'));
+                    ScrollResults();
+                });
+        }
+    });
+}
+
+
 function ScrollRacers()
 {
-    $('#finishedScrolling').ScrollTo({
-        duration: pos*1000,
+    $('#scrollableTable').scrollTo($('#startScrolling'), {
+        duration: 10});
+
+    var dur = pos*500;
+    if (dur<7500) { dur=7500; }
+    $('#scrollableTable').scrollTo($('#finishedScrolling'), {
+        duration: dur,
         easing: 'linear',
-        callback: function(){location.reload();}
+        onAfter: function(){
+            requestAnimationFrame(function() {
+                console.log(pos + ' racers scrolled');
+                UpdateRacers();
+                });
+        }
     });
 }
 
 function UpdateRacers()
 {
+    console.log("Loading racer table");
+    $('#scrollableTable').finish();
+
     $.ajax(
     {
         url: '/api.php?r=finishorder',
-        //url: '/api.php?r=racersswimming',
         type: 'get',
         contentType: 'application/json',
         dataType: 'json'
@@ -42,13 +76,22 @@ function UpdateRacers()
                 time = DateDiff (item.StartTime, item.averageDate, true);
                 $('#finisherTable > tbody').append("<tr><td>" + pos + "</td><td>" + item.RacerNumber + "</td><td class='" + item.Cap + "'></td>"
                     + "<td class='" + fins + "'></td><td>" + item.LastName + ", " + item.FirstName
-                    + "<td>" + item.City + "," + item.Country + "</td>"
+                    + "<td>" + item.City + "," + item.State + "</td>"
                     + "<td>" + time + "</td></tr>");
                 pos++;
-                if (pos > 60) {return false;}
             });
 
-            setTimeout(ScrollRacers, 3000);
+            /*
+            var rnd = Math.floor(Math.random() * 20) //Random number between 1 and 200
+            console.log ("Generating " + rnd + " entries");
+            for (i=0; i<rnd; i++)
+            {
+                $('#finisherTable > tbody').append("<tr><td>" + pos + "</td><td>99</td><td class='Yellow'></td>"
+                    + "<td class=''></td><td>LastName, FirstName<td>City,State</td><td>H:MM:SS</td></tr>");
+                pos++;
+            }*/
+
+            UpdateDashboard();
         }
 
         else
@@ -60,5 +103,6 @@ function UpdateRacers()
     .fail(function(xhr, desc, err)
     {
         console.log(desc);
+        setTimeout( () => location.reload(), 60000);
     });
 }

@@ -1,16 +1,19 @@
 <?php
-	$showRaceTimes = true;
-	$showPagination = true;
+    $showRaceTimes = true;
+    $showPagination = false;
 ?>
-	<title>Dashboard</title>
-	<script type="text/javascript" src="/shared/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="/shared/jquery.scrollTo.min.js"></script>
-	<script type="text/javascript" src="/shared/time_functions.js"></script>
-	<script type="text/javascript" src="/shared/raceTimes_async.js"></script>
-	<script type="text/javascript" src="/shared/raceFinishers_async.js"></script>
-	<link href="/dashboard/assets/dashboard.css" rel="stylesheet" type="text/css" />
+
+    <title>Unofficial Results</title>
+    <script type="text/javascript" src="/shared/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/shared/jquery.plugin.min.js"></script>
+    <script type="text/javascript" src="/shared/jquery.countdown.min.js"></script>
+    <script type="text/javascript" src="/shared/jquery.scrollTo.min.js"></script>
+    <script type="text/javascript" src="/shared/raceTimes_async.js"></script>
+    <script type="text/javascript" src="/shared/time_functions.js"></script>
+    <script type="text/javascript" src="/dashboard/assets/dashboard.js"></script>
+    <link href="/dashboard/assets/dashboard.css" rel="stylesheet" type="text/css" />
 
 
-	
+
 
 

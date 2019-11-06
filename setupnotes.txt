@@ -1,10 +1,60 @@
 
-1) Build LAMP stack
-    - Apache2
-    - MariaDB
-    - phpmysql
-2) Install DB
-    - Run swimrace.sql
-    - Run SPROCS.sql
-    - Create db user
-3) Verify application runs
+* Get Project
+git clone https://github.com/mmtsweng/swimrace_timing.git
+
+ * Build LAMP stack
+sudo apt install mariadb-server
+sudo mysql_secure_installation  -- set swimrace password
+sudo apt install apache2
+sudo apt install php7.3 php7.3-mbstring php7.3-mysql php7.3-curl php7.3-gd php7.3-curl php7.3-zip
+sudo nano /etc/apache2/sites-available/swimracec.conf
+<VirtualHost *:80>
+      <Directory /home/pi/SwimRace/swimrace_timing>
+         AllowOverride none
+         Require all granted
+      </Directory>
+      DocumentRoot "/home/pi/SwimRace/swimrace_timing"
+      ErrorLog ${APACHE_LOG_DIR}/example.com_error.log
+      CustomLog ${APACHE_LOG_DIR}/example.com_access.log combined
+</VirtualHost>
+sudo chown -R www-data:www-data ~/SwimRace/swimrace_timing/
+sudo a2ensite swimrace.conf
+sudo a2dissite 000-default
+sudo systemctl reload apache2
+sudo usermod -a -G www-data pi
+
+In a browser, test:
+http://localhost/test.php
+
+* Setup PHPMyAdmin
+sudo apt install
+sudo mysql -u root -p
+GRANT ALL PRIVILEGES ON *.* TO 'username'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'pi'@'localhost' WITH GRANT OPTION;
+
+Add to /etc/apache2/apache2.conf
+  Include /etc/phpmyadmin/apache.conf
+
+sudo service apache2 restart
+
+Open http://localhost/phpmyadmin
+Create database Swimrace
+Open SQL window and paste content of Swimrace.sql
+
+There's a bug in PHPMyAdmin... (https://stackoverflow.com/questions/48001569/phpmyadmin-count-parameter-must-be-an-array-or-an-object-that-implements-co#49483740)
+edit /usr/share/phpmyadmin/libraries/sql.lib.php
+Around line 613, replace:
+|| (count($analyzed_sql_results['select_expr'] == 1)
+with
+|| ((count($analyzed_sql_results['select_expr']) == 1)
+
+
+* Coding
+To make Geany IDE more useful, make sure you intall plugins:
+sudo apt install geany-plugins
+
+* Presenting
+Turn off Screen Blanking
+Append the following to /etc/lightdm/lightdm.conf
+[SeatDefaults]
+xserver-command=X -s 0 -dpms
