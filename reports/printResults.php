@@ -69,8 +69,8 @@ function printTableHead($heading, $closeTable=false)
     {
         print "</table></tbody></div>";
     }
-    print "<div class='finisherTableSpace'><h2>" . $heading . "</h2>";
-    print "<table class='finisherTableSpace'><thead>"
+    print "<div class='finisherTable'><h2>" . $heading . "</h2>";
+    print "<table class='finisherTable'><thead>"
         . "<tr><td>Pos</td>"
         . "<td>Time</td>"
         . "<td>Name</td>"

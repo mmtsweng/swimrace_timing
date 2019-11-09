@@ -13,6 +13,13 @@ $data = array('raceID'  => 1, 'limit' => $limitValue);
 $result = callAPI('http://localhost/api.php?r=reportOverall', $data);
 printResultTables($result, '5 Mile Overall');
 
+/* CHANGE LIMITS */
+if ($limits) {
+    $limitValue = 3;
+}else{
+    $limitValue = 99;
+}
+
 // 18 and Under
 $data = array('raceID'  => 1, 'gender'  => 'M', 'limit' => $limitValue);
 $result = callAPI('http://localhost/api.php?r=reportOverallU19', $data);
@@ -31,7 +38,7 @@ printResultTables($result, '5 Mile 19 & Over Female');
 
 /* CHANGE LIMITS */
 if ($limits) {
-    $limitValue = 3;
+    $limitValue = 1;
 }else{
     $limitValue = 99;
 }
@@ -40,6 +47,13 @@ if ($limits) {
 $data = array('raceID'  => 1, 'limit' => $limitValue);
 $result = callAPI('http://localhost/api.php?r=reportOverallFin', $data);
 printResultTables($result, '5 Mile Fins');
+
+/* CHANGE LIMITS */
+if ($limits) {
+    $limitValue = 3;
+}else{
+    $limitValue = 99;
+}
 
 
 //AGE CATEGORIES

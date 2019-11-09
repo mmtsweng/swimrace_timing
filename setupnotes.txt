@@ -42,11 +42,16 @@ Create database Swimrace
 Open SQL window and paste content of Swimrace.sql
 
 There's a bug in PHPMyAdmin... (https://stackoverflow.com/questions/48001569/phpmyadmin-count-parameter-must-be-an-array-or-an-object-that-implements-co#49483740)
-edit /usr/share/phpmyadmin/libraries/sql.lib.php
+sudo edit /usr/share/phpmyadmin/libraries/sql.lib.php
 Around line 613, replace:
 || (count($analyzed_sql_results['select_expr'] == 1)
 with
 || ((count($analyzed_sql_results['select_expr']) == 1)
+
+Also (https://devanswers.co/problem-php-7-2-phpmyadmin-warning-in-librariessql-count/)
+sudo edit /usr/share/phpmyadmin/libraries/plugin_interface.lib.php
+If not found, try search for if ($options != null && count($options) > 0)
+Replace with if (! is_null($options) && count((array)$options) > 0) {
 
 
 * Coding

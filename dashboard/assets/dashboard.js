@@ -23,7 +23,7 @@ function GetAge(dateString)
 function ScrollResults()
 {
     $('#scrollableTable').scrollTo($('#finishedScrolling'), {
-        duration: 1000 * 60 * 1, //3 minutes
+        duration: 1000 * 60 * 4, //3 minutes
         easing: 'linear',
         onAfter: function(){
             requestAnimationFrame(function() {
@@ -92,8 +92,10 @@ function UpdateRacers()
                 $('#finisherTable > tbody').append("<tr><td>" + pos + "</td><td>" + item.RacerNumber + "</td><td class='" + item.Cap + "'></td>"
                     + "<td class='" + fins + "'></td><td>" + item.LastName + ", " + item.FirstName
                     + "<td>" + item.City + "," + item.State + "</td>"
-                    + "<td>" + age + ","
-                    + "<td>" + time + "</td></tr>");
+                    + "<td>" + age + "</td>"
+                    + "<td>" + time + "</td>"
+                    //+ "<td style='font-size: 8px'>" + item.StartTime + " - " + item.averageDate + "</td>"
+                    + "</tr>");
                 pos++;
             });
 
